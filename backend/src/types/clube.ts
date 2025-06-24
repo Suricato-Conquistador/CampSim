@@ -1,4 +1,4 @@
 export interface ClubeDTO {
-    nome: string;
-    imagem: string;
+  nome: string;
+  imagem: string;
 }

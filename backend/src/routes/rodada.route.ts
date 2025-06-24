@@ -1,6 +1,12 @@
-import { Router } from "express"
-import { createRodada, getAllRodadas, getRodadaById, updateRodada, deleteRodada } from "../controllers/rodada.controller"
-import { authenticateToken } from "../middleware/auth"
+import { Router } from 'express';
+import {
+  createRodada,
+  getAllRodadas,
+  getRodadaById,
+  updateRodada,
+  deleteRodada,
+} from '../controllers/rodada.controller';
+import { authenticateToken } from '../middleware/auth';
 
 const router = Router();
 

@@ -1,54 +1,54 @@
-import RodadaRepository from "../repositories/rodada.repository";
-import { RodadaDTO } from "../types/rodada";
+import RodadaRepository from '../repositories/rodada.repository';
+import { RodadaDTO } from '../types/rodada';
 
 export default class RodadaService {
-    private repository = new RodadaRepository;
+  private repository = new RodadaRepository();
 
-    async createRodada(data: RodadaDTO) {
-        return this.repository.createRodada(data);
-    }
+  async createRodada(data: RodadaDTO) {
+    return this.repository.createRodada(data);
+  }
 
-    async getAllRodadas() {
-        return this.repository.getAllRodadas();
-    }
+  async getAllRodadas() {
+    return this.repository.getAllRodadas();
+  }
 
-    async getRodadaById(rodadaId: number) {
-        if(!rodadaId) throw new Error('rodadaId não fornecido');
+  async getRodadaById(rodadaId: number) {
+    if (!rodadaId) throw new Error('rodadaId não fornecido');
 
-        const rodada = await this.repository.getRodadaById(rodadaId);
+    const rodada = await this.repository.getRodadaById(rodadaId);
 
-        if(!rodada) throw new Error('Rodada não encontrada');
+    if (!rodada) throw new Error('Rodada não encontrada');
 
-        return rodada;
-    }
+    return rodada;
+  }
 
-    async updateRodada(rodadaId: number, newRodada: RodadaDTO) {
-        if(!rodadaId) throw new Error('rodadaId não fornecido');
+  async updateRodada(rodadaId: number, newRodada: RodadaDTO) {
+    if (!rodadaId) throw new Error('rodadaId não fornecido');
 
-        const rodada = await this.repository.getRodadaById(rodadaId);
+    const rodada = await this.repository.getRodadaById(rodadaId);
 
-        if(!rodada) throw new Error('Rodada não encontrada');
+    if (!rodada) throw new Error('Rodada não encontrada');
 
-        if(newRodada.numero) rodada.numero = newRodada.numero;
+    if (newRodada.numero) rodada.numero = newRodada.numero;
 
-        if(newRodada.campeonatoId) rodada.campeonatoId = newRodada.campeonatoId;
+    if (newRodada.campeonatoId) rodada.campeonatoId = newRodada.campeonatoId;
 
-        const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
+    const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
 
-        return updatedRodada;
-    }
+    return updatedRodada;
+  }
 
-    async deleteRodada(rodadaId: number) {
-        if(!rodadaId) throw new Error('rodadaId não fornecido');
+  async deleteRodada(rodadaId: number) {
+    if (!rodadaId) throw new Error('rodadaId não fornecido');
 
-        const rodada = await this.repository.getRodadaById(rodadaId);
+    const rodada = await this.repository.getRodadaById(rodadaId);
 
-        if(!rodada) throw new Error('Rodada não encontrada');
+    if (!rodada) throw new Error('Rodada não encontrada');
 
-        const result = await this.repository.deleteRodada(rodadaId);
+    const result = await this.repository.deleteRodada(rodadaId);
 
-        if(!result) throw new Error('Erro ao remover rodada');
+    if (!result) throw new Error('Erro ao remover rodada');
 
-        return result;
-    }
+    return result;
+  }
 }

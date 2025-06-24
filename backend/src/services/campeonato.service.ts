@@ -1,56 +1,56 @@
-import { CampeonatoRepository } from "../repositories/campeonato.repository";
-import { CampeonatoDTO } from "../types/campeonato";
+import { CampeonatoRepository } from '../repositories/campeonato.repository';
+import { CampeonatoDTO } from '../types/campeonato';
 
 export class CampeonatoService {
-    private repository = new CampeonatoRepository();
+  private repository = new CampeonatoRepository();
 
-    async createCampeonato(data: CampeonatoDTO) {
-        return this.repository.createCampeonato(data);
-    }
+  async createCampeonato(data: CampeonatoDTO) {
+    return this.repository.createCampeonato(data);
+  }
 
-    async getAllCampeonatos() {
-        return this.repository.findAllCampeonatos();
-    }
+  async getAllCampeonatos() {
+    return this.repository.findAllCampeonatos();
+  }
 
-    async getCampeonatoById(campeonatoId: number) {
-        if(!campeonatoId) throw new Error('campeonatoId não fornecido');
+  async getCampeonatoById(campeonatoId: number) {
+    if (!campeonatoId) throw new Error('campeonatoId não fornecido');
 
-        const campeonato = await this.repository.findCampeonatoById(campeonatoId);
+    const campeonato = await this.repository.findCampeonatoById(campeonatoId);
 
-        if(!campeonato) throw new Error('Campeonato não encontrado');
+    if (!campeonato) throw new Error('Campeonato não encontrado');
 
-        return campeonato;
-    }
+    return campeonato;
+  }
 
-    async updateCampeonato(campeonatoId: number, newCampeonato: CampeonatoDTO) {
-        if(!campeonatoId) throw new Error('campeonatoId não fornecido');
+  async updateCampeonato(campeonatoId: number, newCampeonato: CampeonatoDTO) {
+    if (!campeonatoId) throw new Error('campeonatoId não fornecido');
 
-        const campeonato = await this.repository.findCampeonatoById(campeonatoId);
+    const campeonato = await this.repository.findCampeonatoById(campeonatoId);
 
-        if(!campeonato) throw new Error('Campeonato não encontrado');
+    if (!campeonato) throw new Error('Campeonato não encontrado');
 
-        if(newCampeonato.nome) campeonato.nome = newCampeonato.nome;
+    if (newCampeonato.nome) campeonato.nome = newCampeonato.nome;
 
-        if(newCampeonato.formato) campeonato.formato = newCampeonato.formato;
+    if (newCampeonato.formato) campeonato.formato = newCampeonato.formato;
 
-        if(newCampeonato.finalizado) campeonato.finalizado = newCampeonato.finalizado;
+    if (newCampeonato.finalizado) campeonato.finalizado = newCampeonato.finalizado;
 
-        const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, newCampeonato);
+    const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, newCampeonato);
 
-        return updatedCampeonato;
-    }
+    return updatedCampeonato;
+  }
 
-    async deleteCampeonato(campeonatoId: number) {
-        if(!campeonatoId) throw new Error('campeonatoId não encontrado');
+  async deleteCampeonato(campeonatoId: number) {
+    if (!campeonatoId) throw new Error('campeonatoId não encontrado');
 
-        const campeonato = await this.repository.findCampeonatoById(campeonatoId);
+    const campeonato = await this.repository.findCampeonatoById(campeonatoId);
 
-        if(!campeonato) throw new Error('Campeonato não encontrado');
+    if (!campeonato) throw new Error('Campeonato não encontrado');
 
-        const result = await this.repository.deleteCampeonato(campeonatoId);
+    const result = await this.repository.deleteCampeonato(campeonatoId);
 
-        if(!result) throw new Error('Erro ao remover campeonato');
+    if (!result) throw new Error('Erro ao remover campeonato');
 
-        return result;
-    }
+    return result;
+  }
 }
