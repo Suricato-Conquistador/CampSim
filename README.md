@@ -5,3 +5,52 @@ Uma aplicação web com o intuito de criar campeonatos personalizados e simular 
 
 ## Resumo
 O CampSim é uma aplicação web que permite a **criação de tabelas de campeonatos fictícias** e a **simulação de tabelas de campeonatos** já existentes.
+
+## Tecnologias
+[![My Skills](https://skillicons.dev/icons?i=ts,prisma,express,postgres)]([https://skillicons.dev](https://skillicons.dev))
+
+<!-- 
+## Instalação
+## Uso
+
+## API - Swagger
+
+## Versionamento
+-->
+
+## Organização de Diretórios e Arquivos
+
+### Backend
+
+```
+prisma/
+├── schema.prisma    // Definição dos modelos de dados e configurações do Prisma
+└── seed.ts          // Script para povoar o banco com dados iniciais (seed)
+src/
+├── __tests__/      
+├── config/          // Configurações globais (Prisma client, dotenv, etc)
+├── constants/       
+├── controllers/     // Camada responsável por receber as requisições e responder ao cliente
+├── middleware/      // Middlewares Express (Autenticação, validação de request, etc)
+├── repositories/    // Camada de acesso ao banco de dados
+├── routes/          // Definição e organização das rotas da aplicação
+├── schemas/
+├── services/        // Regras de negócio e validações
+├── types/           // Tipagens compartilhadas (DTOs, enums, etc)
+├── utils/
+├── app.ts           // Instancia o app Express, aplica middlewares e rotas
+└── server.ts        // Inicializa o servidor e conecta ao banco de dados
+```
+
+## Metas
+- [X] Definir e modelar o banco de dados com Prisma
+- [ ] Criar seeders iniciais
+- [X] Implementar autenticação com JWT e bcrypt
+- [ ] Desenvolver os módulos da aplicação
+- [ ] Criar validações de entrada
+- [ ] Implementar a estrutura de repositório, service e controller
+- [ ] Criar rodas RESTful para cada entidade
+- [ ] Proteger rotas com autenticação
+- [ ] Configurar tratamento global de erros
+- [ ] Adicionar testes unitários
+- [ ] Documentar principais rotas e respostas com swagger
