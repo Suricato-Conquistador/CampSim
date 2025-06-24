@@ -48,7 +48,7 @@ model Rodada {
 model Clube {
   id            Int           @id @default(autoincrement())
   nome          String
-  imagem        String
+  imagem        String        @default("")
   estatisticas  Estatistica[]
   comoMandante  Partida[]     @relation("Mandante")
   comoVisitante Partida[]     @relation("Visitante")

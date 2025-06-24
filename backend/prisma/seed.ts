@@ -14,6 +14,24 @@ async function main() {
                 role: Role.ADMIN,
             }
         });
+        const campeonato = await prisma.campeonato.create({
+            data: {
+                nome: 'Premier League',
+                userId: 1,
+            }
+        });
+        const clube = await prisma.clube.create({
+            data: {
+                nome: 'Liverpool',
+                imagem: 'https://img1.gratispng.com/lnd/20241225/ib/8bdd071b5a311bdb157574c3552688.webp'
+            }
+        });
+        const rodada = await prisma.rodada.create({
+            data: {
+                numero: 1,
+                campeonatoId: 1
+            }
+        });
         console.log('Seed gerada com sucesso!');
     } catch(error) {
         console.error('Erro no seed', error);
