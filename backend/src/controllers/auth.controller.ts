@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import { AuthRequest } from "../middleware/auth";
 import { AuthService } from "../services/auth.service";
 
 const service = new AuthService();
 
 export const register = async (req: Request, res: Response) => {
     try {
-        const user = await service.register(req.body);
+        const { body } = req;
+        
+        const user = await service.register(body);
         
         return res.status(201).json(user);
     } catch(error: any) {
@@ -16,9 +17,9 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
     try {
-        const loginDTO = req.body;
+        const { body } = req;
 
-        const result = await service.login(loginDTO);
+        const result = await service.login(body);
 
         res.status(200).json(result);
     } catch(error: any) {

@@ -1,1 +1,1 @@
-export { Role } from '@prisma/client';
+export { Role, Formato } from '@prisma/client';

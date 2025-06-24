@@ -1,13 +1,13 @@
 import { JWT_SECRET } from "../config";
 import { AuthRepository } from "../repositories/auth.repository";
-import { RegisterDTO, LoginDTO } from "../types/user";
+import { UserDTO, LoginDTO } from "../types/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export class AuthService {
     private repository = new AuthRepository();
 
-    async register(data: RegisterDTO) {
+    async register(data: UserDTO) {
         const existing = await this.repository.findUserByEmail(data.email);
 
         if(existing) throw new Error('Email já cadastrado');

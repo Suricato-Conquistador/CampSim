@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma'
-import { RegisterDTO } from '../types/user';
+import { UserDTO } from '../types/user';
 
 export class AuthRepository {
-    async createUser(registerDTO: RegisterDTO) {
+    async createUser(registerDTO: UserDTO) {
         return prisma.user.create({ data: registerDTO });
     }
     
