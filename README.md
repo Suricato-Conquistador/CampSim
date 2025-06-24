@@ -7,7 +7,7 @@ Uma aplicação web com o intuito de criar campeonatos personalizados e simular 
 O CampSim é uma aplicação web que permite a **criação de tabelas de campeonatos fictícias** e a **simulação de tabelas de campeonatos** já existentes.
 
 ## Tecnologias
-[![My Skills](https://skillicons.dev/icons?i=ts,prisma,express,postgres)]([https://skillicons.dev](https://skillicons.dev))
+[![Tecnologias](https://skillicons.dev/icons?i=ts,prisma,express,postgres)]([https://skillicons.dev](https://skillicons.dev))
 
 <!-- 
 ## Instalação
@@ -41,6 +41,12 @@ src/
 ├── app.ts           // Instancia o app Express, aplica middlewares e rotas
 └── server.ts        // Inicializa o servidor e conecta ao banco de dados
 ```
+
+### Banco de Dados
+
+A estrutura do banco de dados seguiu o seguinte modelo:
+
+[Modelo Logico](./docs/LogicModel.PNG)
 
 ## Metas
 - [X] Definir e modelar o banco de dados com Prisma
