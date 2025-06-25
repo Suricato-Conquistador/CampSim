@@ -14,6 +14,7 @@ O CampSim é uma aplicação web que permite a **criação de tabelas de campeon
 [![Tecnologias](https://skillicons.dev/icons?i=ts,prisma,express,postgres)]([https://skillicons.dev](https://skillicons.dev))
 
 <!-- 
+
 ![GitHub issues](https://img.shields.io/github/issues/Suricato-Conquistador/CampSim)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Suricato-Conquistador/CampSim)
 
