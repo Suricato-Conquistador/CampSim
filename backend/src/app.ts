@@ -4,8 +4,8 @@ import userRoutes from './routes/user.route';
 import campeonatoRoutes from './routes/campeonato.route';
 import rodadasRoutes from './routes/rodada.route';
 import clubesRoutes from './routes/clube.route';
-//import partidasRoutes from './routes/partida.route';
-//import estatisticasRoutes from './routes/estatistica.route';
+import partidasRoutes from './routes/partida.route';
+import estatisticasRoutes from './routes/estatistica.route';
 //errorHandler
 
 const app = express();
@@ -17,8 +17,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/campeonatos', campeonatoRoutes);
 app.use('/api/rodadas', rodadasRoutes);
 app.use('/api/clubes', clubesRoutes);
-//app.use('/api/partidas', partidasRoutes);
-//app.use('/api/estatisticas', estatisticasRoutes);
+app.use('/api/partidas', partidasRoutes);
+app.use('/api/estatisticas', estatisticasRoutes);
 
 //errorHandler
 

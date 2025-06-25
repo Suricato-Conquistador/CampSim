@@ -35,7 +35,7 @@ export class CampeonatoService {
 
     if (newCampeonato.finalizado) campeonato.finalizado = newCampeonato.finalizado;
 
-    const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, newCampeonato);
+    const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, campeonato);
 
     return updatedCampeonato;
   }

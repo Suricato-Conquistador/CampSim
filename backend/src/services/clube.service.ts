@@ -33,7 +33,7 @@ export class ClubeService {
 
     if (newClube.imagem) clube.imagem = newClube.imagem;
 
-    const updatedClube = await this.repository.updateClube(clubeId, newClube);
+    const updatedClube = await this.repository.updateClube(clubeId, clube);
 
     return updatedClube;
   }

@@ -6,11 +6,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:prisma": "npx prisma format",
+    "db:push": "prisma db push",
+    "db:seed": "ts-node prisma/seed.ts",
+    "db:clear": "ts-node prisma/clear.ts",
     "dev": "ts-node-dev --respawn --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
-    "db:push": "prisma db push",
-    "db:seed": "ts-node prisma/seed.ts"
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "ISC",

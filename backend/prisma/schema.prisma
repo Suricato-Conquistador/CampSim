@@ -56,8 +56,8 @@ model Clube {
 
 model Partida {
   id               Int    @id @default(autoincrement())
-  golsCasa         Int
-  golsFora         Int
+  golsMandante     Int
+  golsVisitante    Int
   clubeMandante    Clube  @relation("Mandante", fields: [clubeMandanteId], references: [id])
   clubeMandanteId  Int
   clubeVisitante   Clube  @relation("Visitante", fields: [clubeVisitanteId], references: [id])
