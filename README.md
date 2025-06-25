@@ -64,6 +64,6 @@ A estrutura do banco de dados seguiu o seguinte modelo:
 - [X] Implementar a estrutura de repositório, service e controller
 - [X] Criar rotas RESTful para cada entidade
 - [X] Proteger rotas com autenticação
-- [ ] Configurar tratamento global de erros
+- [X] Configurar tratamento global de erros
 - [ ] Adicionar testes unitários
 - [ ] Documentar principais rotas e respostas com swagger
