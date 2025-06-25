@@ -1,16 +1,17 @@
 import { UserRepository } from '../repositories/user.repository';
 import { UserDTO } from '../types/user';
 import bcrypt from 'bcryptjs';
+import { ApiError } from '../utils/apiError';
 
 export class UserService {
   private repository = new UserRepository();
 
   async getOwner(userId: number) {
-    if (!userId) throw new Error('userId não fornecido');
+    if (!userId) throw new ApiError('userId não fornecido', 400);
 
     const user = await this.repository.findUserById(userId);
 
-    if (!user) throw new Error('Usuário não encontrado');
+    if (!user) throw new ApiError('Usuário não encontrado', 404);
 
     const { senha, ...returnedUser } = user;
 
@@ -18,11 +19,11 @@ export class UserService {
   }
 
   async getUserById(userId: number) {
-    if (!userId) throw new Error('userId não fornecido');
+    if (!userId) throw new ApiError('userId não fornecido', 400);
 
     const user = await this.repository.findUserById(userId);
 
-    if (!user) throw new Error('Usuário não encontrado');
+    if (!user) throw new ApiError('Usuário não encontrado', 404);
 
     const { senha, ...returnedUser } = user;
 
@@ -30,11 +31,11 @@ export class UserService {
   }
 
   async updateUser(userId: number, newUser: UserDTO) {
-    if (!userId) throw new Error('userId não fornecido');
+    if (!userId) throw new ApiError('userId não fornecido', 400);
 
     const user = await this.repository.findUserById(userId);
 
-    if (!user) throw new Error('Usuário não encontrado');
+    if (!user) throw new ApiError('Usuário não encontrado', 404);
 
     if (newUser.nome) user.nome = newUser.nome;
 
@@ -55,15 +56,15 @@ export class UserService {
   }
 
   async deleteUser(userId: number) {
-    if (!userId) throw new Error('userId não fornecido');
+    if (!userId) throw new ApiError('userId não fornecido', 400);
 
     const user = await this.repository.findUserById(userId);
 
-    if (!user) throw new Error('Usuário não encontrado');
+    if (!user) throw new ApiError('Usuário não encontrado', 404);
 
     const result = await this.repository.deleteUser(userId);
 
-    if (!result) throw new Error('Erro ao remover usuário');
+    if (!result) throw new ApiError('Erro ao remover usuário');
 
     return result;
   }

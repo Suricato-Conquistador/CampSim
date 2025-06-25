@@ -1,5 +1,6 @@
 import { ClubeRepository } from '../repositories/clube.repository';
 import { ClubeDTO } from '../types/clube';
+import { ApiError } from '../utils/apiError';
 
 export class ClubeService {
   private repository = new ClubeRepository();
@@ -13,21 +14,21 @@ export class ClubeService {
   }
 
   async getClubeById(clubeId: number) {
-    if (!clubeId) throw new Error('clubeId não fornecido');
+    if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
     const clube = await this.repository.findClubeById(clubeId);
 
-    if (!clube) throw new Error('Clube não encontrado');
+    if (!clube) throw new ApiError('Clube não encontrado', 404);
 
     return clube;
   }
 
   async updateClube(clubeId: number, newClube: ClubeDTO) {
-    if (!clubeId) throw new Error('clubeId não fornecido');
+    if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
     const clube = await this.repository.findClubeById(clubeId);
 
-    if (!clube) throw new Error('Clube não encontrado');
+    if (!clube) throw new ApiError('Clube não encontrado', 404);
 
     if (newClube.nome) clube.nome = newClube.nome;
 
@@ -39,15 +40,15 @@ export class ClubeService {
   }
 
   async deleteClube(clubeId: number) {
-    if (!clubeId) throw new Error('clubeId não fornecido');
+    if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
     const clube = await this.repository.findClubeById(clubeId);
 
-    if (!clube) throw new Error('Clube não encontrado');
+    if (!clube) throw new ApiError('Clube não encontrado', 404);
 
     const result = await this.repository.deleteClube(clubeId);
 
-    if (!result) throw new Error('Erro ao remover clube');
+    if (!result) throw new ApiError('Erro ao remover clube');
 
     return result;
   }

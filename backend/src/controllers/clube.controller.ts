@@ -1,66 +1,64 @@
 import { Request, Response } from 'express';
 import { ClubeService } from '../services/clube.service';
+import { SuccessDTO } from '../types/success';
 
 const service = new ClubeService();
 
-export const createClube = async (req: any, res: Response) => {
-  try {
-    const userId = req.userId;
-    const { body } = req;
+export const createClube = async (req: any, res: Response<SuccessDTO>) => {
+  const userId = req.userId;
+  const { body } = req;
 
-    const clube = await service.createClube(body);
+  const clube = await service.createClube(body);
 
-    return res.status(201).json(clube);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(201).json({
+    error: false,
+    message: 'Dados criados com sucesso!',
+    data: clube,
+  });
 };
 
-export const getAllClubes = async (req: any, res: Response) => {
-  try {
-    const userId = req.userId;
+export const getAllClubes = async (req: any, res: Response<SuccessDTO>) => {
+  const userId = req.userId;
 
-    const clubes = await service.getAllClubes();
+  const clubes = await service.getAllClubes();
 
-    return res.status(200).json(clubes);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(200).json({
+    error: false,
+    data: clubes,
+  });
 };
 
-export const getClubeById = async (req: any, res: Response) => {
-  try {
-    const { id } = req.params;
+export const getClubeById = async (req: any, res: Response<SuccessDTO>) => {
+  const { id } = req.params;
 
-    const clube = await service.getClubeById(Number(id));
+  const clube = await service.getClubeById(Number(id));
 
-    return res.status(200).json(clube);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(200).json({
+    error: false,
+    data: clube,
+  });
 };
 
-export const updateClube = async (req: any, res: Response) => {
-  try {
-    const { body } = req;
-    const { id } = req.params;
+export const updateClube = async (req: any, res: Response<SuccessDTO>) => {
+  const { body } = req;
+  const { id } = req.params;
 
-    const result = await service.updateClube(Number(id), body);
+  const result = await service.updateClube(Number(id), body);
 
-    return res.status(200).json(result);
-  } catch (error: any) {
-    return req.status(400).json({ message: error.message });
-  }
+  return res.status(200).json({
+    error: false,
+    message: 'Dados atualizados com sucesso!',
+    data: result,
+  });
 };
 
-export const deleteClube = async (req: any, res: Response) => {
-  try {
-    const { id } = req.params;
+export const deleteClube = async (req: any, res: Response<SuccessDTO>) => {
+  const { id } = req.params;
 
-    const result = await service.deleteClube(Number(id));
+  const result = await service.deleteClube(Number(id));
 
-    return res.status(200).json(result);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(204).json({
+    error: false,
+    message: 'Dados removidos com sucesso!',
+  });
 };

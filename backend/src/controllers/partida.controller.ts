@@ -1,66 +1,63 @@
 import { Request, Response } from 'express';
 import { PartidaService } from '../services/partida.service';
+import { SuccessDTO } from '../types/success';
 
 const service = new PartidaService();
 
-export const createPartida = async (req: any, res: Response) => {
-  try {
-    const userId = req.userId;
-    const { body } = req;
+export const createPartida = async (req: any, res: Response<SuccessDTO>) => {
+  const userId = req.userId;
+  const { body } = req;
 
-    const partida = await service.createPartida(body);
+  const partida = await service.createPartida(body);
 
-    return res.status(201).json(partida);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(201).json({
+    error: false,
+    message: 'Dados criados com sucesso!',
+    data: partida,
+  });
 };
 
-export const getAllPartidas = async (req: any, res: Response) => {
-  try {
-    const userId = req.userId;
+export const getAllPartidas = async (req: any, res: Response<SuccessDTO>) => {
+  const userId = req.userId;
 
-    const partidas = await service.getAllPartidas();
+  const partidas = await service.getAllPartidas();
 
-    return res.status(200).json(partidas);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(200).json({
+    error: false,
+    data: partidas,
+  });
 };
 
-export const getPartidaById = async (req: any, res: Response) => {
-  try {
-    const { id } = req;
+export const getPartidaById = async (req: any, res: Response<SuccessDTO>) => {
+  const { id } = req;
 
-    const partida = await service.getPartidasById(Number(id));
+  const partida = await service.getPartidasById(Number(id));
 
-    return res.status(200).json(partida);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(200).json({
+    error: false,
+    data: partida,
+  });
 };
 
-export const updatePartida = async (req: any, res: Response) => {
-  try {
-    const { body } = req;
-    const { id } = req.params;
+export const updatePartida = async (req: any, res: Response<SuccessDTO>) => {
+  const { body } = req;
+  const { id } = req.params;
 
-    const result = await service.updatePartida(Number(id), body);
+  const result = await service.updatePartida(Number(id), body);
 
-    return res.status(200).json(result);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(200).json({
+    error: false,
+    message: 'Dados atualizados com sucesso!',
+  });
 };
 
-export const deletePartida = async (req: any, res: Response) => {
-  try {
-    const { id } = req.params;
+export const deletePartida = async (req: any, res: Response<SuccessDTO>) => {
+  const { id } = req.params;
 
-    const result = await service.deletePartida(Number(id));
+  const result = await service.deletePartida(Number(id));
 
-    return res.status(200).json(result);
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  return res.status(204).json({
+    error: false,
+    message: 'Dados removidos com sucesso!',
+  });
 };
