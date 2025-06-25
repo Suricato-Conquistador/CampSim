@@ -1,0 +1,18 @@
+{
+  "types": [
+    { "type": "feat", "section": "Funcionalidades" },
+    { "type": "fix", "section": "Correções" },
+    { "type": "refact", "section": "Refatorações" },
+    { "type": "docs", "section": "Documentação" },
+    { "type": "test", "section": "Testes" },
+    { "type": "chore", "section": "Tarefas" },
+    { "type": "merge", "section": "Merges" }
+  ],
+  "commitUrlFormat": "https://github.com/Suricato-Conquistador/CampSim/commit/{{hash}}",
+  "compareUrlFormat": "https://github.com/Suricato-Conquistador/CampSim/compare/{{previousTag}}...{{currentTag}}",
+  "issueUrlFormat": "https://github.com/Suricato-Conquistador/CampSim/issues/{{id}}",
+  "userUrlFormat": "https://github.com/{{user}}",
+  "skip": {
+    "tag": false
+  }
+}
