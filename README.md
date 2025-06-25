@@ -46,7 +46,7 @@ src/
 
 A estrutura do banco de dados seguiu o seguinte modelo:
 
-[Modelo Logico](./docs/LogicModel.PNG)
+![Modelo Logico](./docs/LogicModel.PNG)
 
 ## Metas
 - [X] Definir e modelar o banco de dados com Prisma
