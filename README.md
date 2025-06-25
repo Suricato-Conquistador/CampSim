@@ -1,4 +1,8 @@
 # CampSim
+![GitHub last commit](https://img.shields.io/github/last-commit/Suricato-Conquistador/CampSim)
+![License](https://img.shields.io/github/license/Suricato-Conquistador/CampSim)
+![Code style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?logo=prettier)
+
 Uma aplicação web com o intuito de criar campeonatos personalizados e simular campeonatos existentes.
 
 >_💻 Status do projeto: Em desenvolvimento._
@@ -10,6 +14,10 @@ O CampSim é uma aplicação web que permite a **criação de tabelas de campeon
 [![Tecnologias](https://skillicons.dev/icons?i=ts,prisma,express,postgres)]([https://skillicons.dev](https://skillicons.dev))
 
 <!-- 
+
+![GitHub issues](https://img.shields.io/github/issues/Suricato-Conquistador/CampSim)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Suricato-Conquistador/CampSim)
+
 ## Instalação
 ## Uso
 
@@ -46,17 +54,17 @@ src/
 
 A estrutura do banco de dados seguiu o seguinte modelo:
 
-[Modelo Logico](./docs/LogicModel.PNG)
+![Modelo Logico](./docs/LogicModel.PNG)
 
 ## Metas
 - [X] Definir e modelar o banco de dados com Prisma
-- [ ] Criar seeders iniciais
+- [X] Criar seeders iniciais
 - [X] Implementar autenticação com JWT e bcrypt
-- [ ] Desenvolver os módulos da aplicação
+- [X] Desenvolver os módulos da aplicação
 - [ ] Criar validações de entrada
-- [ ] Implementar a estrutura de repositório, service e controller
-- [ ] Criar rodas RESTful para cada entidade
-- [ ] Proteger rotas com autenticação
-- [ ] Configurar tratamento global de erros
+- [X] Implementar a estrutura de repositório, service e controller
+- [X] Criar rotas RESTful para cada entidade
+- [X] Proteger rotas com autenticação
+- [X] Configurar tratamento global de erros
 - [ ] Adicionar testes unitários
 - [ ] Documentar principais rotas e respostas com swagger
