@@ -39,8 +39,4 @@ jobs:
 
       - name: Commit e push de tags e changelog
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "chore(release): versão automática"
           git push origin main --follow-tags
