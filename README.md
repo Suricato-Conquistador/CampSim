@@ -1,6 +1,6 @@
 # CampSim
 ![GitHub last commit](https://img.shields.io/github/last-commit/Suricato-Conquistador/CampSim)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Suricato-Conquistador/CampSim)
+![GitHub issues](https://img.shields.io/github/issues/Suricato-Conquistador/CampSim)
 ![License](https://img.shields.io/github/license/Suricato-Conquistador/CampSim)
 ![Code style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?logo=prettier)
 
@@ -16,7 +16,7 @@ O CampSim é uma aplicação web que permite a **criação de tabelas de campeon
 
 <!-- 
 
-![GitHub issues](https://img.shields.io/github/issues/Suricato-Conquistador/CampSim)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Suricato-Conquistador/CampSim)
 
 ## Instalação
 ## Uso
