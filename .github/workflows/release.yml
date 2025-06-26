@@ -26,6 +26,12 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Set Git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          get config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+
       - name: Rodar standard-version
         run: npm run release
         env:
