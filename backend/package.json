@@ -11,7 +11,8 @@
     "db:clear": "ts-node prisma/clear.ts",
     "dev": "ts-node-dev --respawn --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "release": "standard-version"
   },
   "author": "",
   "license": "ISC",
