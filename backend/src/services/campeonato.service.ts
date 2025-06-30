@@ -1,11 +1,17 @@
 import { CampeonatoRepository } from '../repositories/campeonato.repository';
-import { CampeonatoDTO } from '../types/campeonato';
+import { CreateCampeonatoDTO, UpdateCampeonatoDTO, createCampeonatoSchema } from '../schemas/campeonato.schema'; 
 import { ApiError } from '../utils/apiError';
 
 export class CampeonatoService {
   private repository = new CampeonatoRepository();
 
-  async createCampeonato(data: CampeonatoDTO) {
+  async createCampeonato(data: CreateCampeonatoDTO) {
+    const parsed = createCampeonatoSchema.safeParse(data);
+
+    if(!parsed.success) {
+      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+    }
+
     return this.repository.createCampeonato(data);
   }
 
@@ -23,7 +29,14 @@ export class CampeonatoService {
     return campeonato;
   }
 
-  async updateCampeonato(campeonatoId: number, newCampeonato: CampeonatoDTO) {
+  async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
+    const parsed = createCampeonatoSchema.safeParse(newCampeonato);
+
+    if(!parsed.success) {
+      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+    }
+
+    
     if (!campeonatoId) throw new ApiError('campeonatoId não fornecido', 400);
 
     const campeonato = await this.repository.findCampeonatoById(campeonatoId);

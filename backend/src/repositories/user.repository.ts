@@ -1,5 +1,5 @@
 import { prisma } from '../config/prisma';
-import { UserDTO } from '../types/user';
+import { UserDTO } from '../schemas/auth.schema';
 
 export class UserRepository {
   async findUserById(userId: number) {
