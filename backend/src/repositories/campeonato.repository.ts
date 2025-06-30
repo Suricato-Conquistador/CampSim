@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma';
-import { CampeonatoDTO } from '../types/campeonato';
+import { CreateCampeonatoDTO, UpdateCampeonatoDTO } from '../schemas/campeonato.schema';
 
 export class CampeonatoRepository {
-  async createCampeonato(campeonatoDTO: CampeonatoDTO) {
+  async createCampeonato(campeonatoDTO: CreateCampeonatoDTO) {
     return prisma.campeonato.create({ data: campeonatoDTO });
   }
 
@@ -14,7 +14,7 @@ export class CampeonatoRepository {
     return prisma.campeonato.findUnique({ where: { id: campeonatoId } });
   }
 
-  async updateCampeonato(campeonatoId: number, newCampeonato: CampeonatoDTO) {
+  async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
     return prisma.campeonato.update({ where: { id: campeonatoId }, data: newCampeonato });
   }
 

@@ -1,5 +1,5 @@
 import { UserRepository } from '../repositories/user.repository';
-import { UserDTO } from '../types/user';
+import { UpdateUserDTO, updateUserSchema } from '../schemas/user.schema';
 import bcrypt from 'bcryptjs';
 import { ApiError } from '../utils/apiError';
 
@@ -30,7 +30,13 @@ export class UserService {
     return returnedUser;
   }
 
-  async updateUser(userId: number, newUser: UserDTO) {
+  async updateUser(userId: number, newUser: UpdateUserDTO) {
+    const parsed = updateUserSchema.safeParse(newUser);
+
+    if(!parsed.success) {
+      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+    }
+
     if (!userId) throw new ApiError('userId não fornecido', 400);
 
     const user = await this.repository.findUserById(userId);
@@ -45,8 +51,6 @@ export class UserService {
       const newPassword = await bcrypt.hash(newUser.senha, 10);
       user.senha = newPassword;
     }
-
-    if (newUser.role) user.role = newUser.role;
 
     const updatedUser = await this.repository.updateUser(userId, user);
 

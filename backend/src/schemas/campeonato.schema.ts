@@ -1,0 +1,19 @@
+import { z } from 'zod';
+import { Formato } from '../types/enums'
+
+export const createCampeonatoSchema = z.object({
+    nome: z.string().min(4, 'O nome deve ter ao menos 4 caracteres'),
+    formato: z.nativeEnum(Formato).default(Formato.PONTOS_CORRIDOS),
+    finalizado: z.boolean().default(false),
+    userId: z.number().gt(0, 'O id deve ser um número maior que 0'),
+});
+
+export type CreateCampeonatoDTO = z.infer<typeof createCampeonatoSchema>;
+
+export const updateCampeonatoSchema = z.object({
+    nome: z.string().min(4, 'O nome deve ter ao menos 4 caracteres'),
+    formato: z.nativeEnum(Formato).default(Formato.PONTOS_CORRIDOS),
+    finalizado: z.boolean().default(false),
+});
+
+export type UpdateCampeonatoDTO = z.infer<typeof updateCampeonatoSchema>;
