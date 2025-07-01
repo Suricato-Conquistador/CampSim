@@ -1,5 +1,5 @@
 export interface ErrorDTO {
-  error: true;
-  message: string;
-  statusCode?: number;
+    error: true;
+    message: string;
+    statusCode?: number;
 }

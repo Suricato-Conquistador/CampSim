@@ -1,55 +1,72 @@
 import { PartidaRepository } from '../repositories/partida.repository';
-import { CreatePartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
+import {
+    CreatePartidaDTO,
+    createPartidaSchema,
+    UpdatePartidaDTO,
+    updatePartidaSchema,
+} from '../schemas/partida.schema';
 import { ApiError } from '../utils/apiError';
 
 export class PartidaService {
-  private repository = new PartidaRepository();
+    private repository = new PartidaRepository();
 
-  async createPartida(data: CreatePartidaDTO) {
-    return this.repository.createPartida(data);
-  }
+    async createPartida(data: CreatePartidaDTO) {
+        const parsed = createPartidaSchema.safeParse(data);
 
-  async getAllPartidas() {
-    return this.repository.findAllPartidas();
-  }
+        if (!parsed.success) {
+            throw new ApiError(JSON.stringify(parsed.error.format()));
+        }
 
-  async getPartidasById(partidaId: number) {
-    if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
+        return this.repository.createPartida(data);
+    }
 
-    const partida = await this.repository.findPartidaById(partidaId);
+    async getAllPartidas() {
+        return this.repository.findAllPartidas();
+    }
 
-    if (!partida) throw new ApiError('Partida não encontrado', 404);
+    async getPartidasById(partidaId: number) {
+        if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
 
-    return partida;
-  }
+        const partida = await this.repository.findPartidaById(partidaId);
 
-  async updatePartida(partidaId: number, newPartida: UpdatePartidaDTO) {
-    if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
+        if (!partida) throw new ApiError('Partida não encontrado', 404);
 
-    const partida = await this.repository.findPartidaById(partidaId);
+        return partida;
+    }
 
-    if (!partida) throw new ApiError('Partida não encontrado', 404);
+    async updatePartida(partidaId: number, newPartida: UpdatePartidaDTO) {
+        const parsed = updatePartidaSchema.safeParse(newPartida);
 
-    if (newPartida.golsMandante) partida.golsMandante = newPartida.golsMandante;
+        if (!parsed.success) {
+            throw new ApiError(JSON.stringify(parsed.error.format()));
+        }
 
-    if (newPartida.golsVisitante) partida.golsVisitante = newPartida.golsVisitante;
+        if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
 
-    const updatedPartida = await this.repository.updatePartida(partidaId, partida);
+        const partida = await this.repository.findPartidaById(partidaId);
 
-    return updatedPartida;
-  }
+        if (!partida) throw new ApiError('Partida não encontrado', 404);
 
-  async deletePartida(partidaId: number) {
-    if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
+        if (newPartida.golsMandante) partida.golsMandante = newPartida.golsMandante;
 
-    const partida = await this.repository.findPartidaById(partidaId);
+        if (newPartida.golsVisitante) partida.golsVisitante = newPartida.golsVisitante;
 
-    if (!partida) throw new ApiError('Partida não encontrado', 404);
+        const updatedPartida = await this.repository.updatePartida(partidaId, partida);
 
-    const result = await this.repository.deletePartida(partidaId);
+        return updatedPartida;
+    }
 
-    if (!result) throw new ApiError('Erro ao remover partida');
+    async deletePartida(partidaId: number) {
+        if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
 
-    return result;
-  }
+        const partida = await this.repository.findPartidaById(partidaId);
+
+        if (!partida) throw new ApiError('Partida não encontrado', 404);
+
+        const result = await this.repository.deletePartida(partidaId);
+
+        if (!result) throw new ApiError('Erro ao remover partida');
+
+        return result;
+    }
 }

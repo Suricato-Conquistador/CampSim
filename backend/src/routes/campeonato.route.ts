@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
-  createCampeonato,
-  getAllCampeonatos,
-  getCampeonatoById,
-  updateCampeonato,
-  deleteCampeonato,
+    createCampeonato,
+    getAllCampeonatos,
+    getCampeonatoById,
+    updateCampeonato,
+    deleteCampeonato,
 } from '../controllers/campeonato.controller';
 import { authenticateToken } from '../middleware/auth';
 
