@@ -11,12 +11,6 @@ export default class RodadaService {
     private repository = new RodadaRepository();
 
     async createRodada(data: CreateRodadaDTO) {
-        const parsed = createRodadaSchema.safeParse(data);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         return this.repository.createRodada(data);
     }
 
@@ -35,19 +29,11 @@ export default class RodadaService {
     }
 
     async updateRodada(rodadaId: number, newRodada: UpdateRodadaDTO) {
-        const parsed = updateRodadaSchema.safeParse(newRodada);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
 
         const rodada = await this.repository.getRodadaById(rodadaId);
 
         if (!rodada) throw new ApiError('Rodada não encontrada', 404);
-
-        if (newRodada.numero) rodada.numero = newRodada.numero;
 
         const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
 

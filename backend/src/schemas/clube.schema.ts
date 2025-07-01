@@ -8,7 +8,7 @@ export const createClubeSchema = z.object({
 export type CreateClubeDTO = z.infer<typeof createClubeSchema>;
 
 export const updateClubeSchema = z.object({
-    imagem: z.string().url('O nome deve ser uma URL'),
+    imagem: z.string().url('O nome deve ser uma URL').optional(),
 });
 
 export type UpdateClubeDTO = z.infer<typeof updateClubeSchema>;

@@ -31,21 +31,11 @@ export class UserService {
     }
 
     async updateUser(userId: number, newUser: UpdateUserDTO) {
-        const parsed = updateUserSchema.safeParse(newUser);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         if (!userId) throw new ApiError('userId não fornecido', 400);
 
         const user = await this.repository.findUserById(userId);
 
         if (!user) throw new ApiError('Usuário não encontrado', 404);
-
-        if (newUser.nome) user.nome = newUser.nome;
-
-        if (newUser.email) user.email = newUser.email;
 
         if (newUser.senha) {
             const newPassword = await bcrypt.hash(newUser.senha, 10);

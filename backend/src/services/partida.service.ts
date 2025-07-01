@@ -11,12 +11,6 @@ export class PartidaService {
     private repository = new PartidaRepository();
 
     async createPartida(data: CreatePartidaDTO) {
-        const parsed = createPartidaSchema.safeParse(data);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         return this.repository.createPartida(data);
     }
 
@@ -35,21 +29,11 @@ export class PartidaService {
     }
 
     async updatePartida(partidaId: number, newPartida: UpdatePartidaDTO) {
-        const parsed = updatePartidaSchema.safeParse(newPartida);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
 
         const partida = await this.repository.findPartidaById(partidaId);
 
         if (!partida) throw new ApiError('Partida não encontrado', 404);
-
-        if (newPartida.golsMandante) partida.golsMandante = newPartida.golsMandante;
-
-        if (newPartida.golsVisitante) partida.golsVisitante = newPartida.golsVisitante;
 
         const updatedPartida = await this.repository.updatePartida(partidaId, partida);
 
