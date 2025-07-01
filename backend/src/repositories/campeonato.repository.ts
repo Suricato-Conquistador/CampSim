@@ -1,24 +1,24 @@
 import { prisma } from '../config/prisma';
-import { CampeonatoDTO } from '../types/campeonato';
+import { CreateCampeonatoDTO, UpdateCampeonatoDTO } from '../schemas/campeonato.schema';
 
 export class CampeonatoRepository {
-  async createCampeonato(campeonatoDTO: CampeonatoDTO) {
-    return prisma.campeonato.create({ data: campeonatoDTO });
-  }
+    async createCampeonato(campeonatoDTO: CreateCampeonatoDTO) {
+        return prisma.campeonato.create({ data: campeonatoDTO });
+    }
 
-  async findAllCampeonatos() {
-    return prisma.campeonato.findMany();
-  }
+    async findAllCampeonatos() {
+        return prisma.campeonato.findMany();
+    }
 
-  async findCampeonatoById(campeonatoId: number) {
-    return prisma.campeonato.findUnique({ where: { id: campeonatoId } });
-  }
+    async findCampeonatoById(campeonatoId: number) {
+        return prisma.campeonato.findUnique({ where: { id: campeonatoId } });
+    }
 
-  async updateCampeonato(campeonatoId: number, newCampeonato: CampeonatoDTO) {
-    return prisma.campeonato.update({ where: { id: campeonatoId }, data: newCampeonato });
-  }
+    async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
+        return prisma.campeonato.update({ where: { id: campeonatoId }, data: newCampeonato });
+    }
 
-  async deleteCampeonato(campeonatoId: number) {
-    return prisma.campeonato.delete({ where: { id: campeonatoId } });
-  }
+    async deleteCampeonato(campeonatoId: number) {
+        return prisma.campeonato.delete({ where: { id: campeonatoId } });
+    }
 }
