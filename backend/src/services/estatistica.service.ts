@@ -1,11 +1,11 @@
 import { EstatisticaRepository } from '../repositories/estatistica.repository';
-import { EstatisticaDTO } from '../types/estatistica';
+import { CreateEstatisticaDTO, UpdateEstatisticaDTO } from '../schemas/estatistica.schema';
 import { ApiError } from '../utils/apiError';
 
 export class EstatisticaService {
   private repository = new EstatisticaRepository();
 
-  async createEstatistica(data: EstatisticaDTO) {
+  async createEstatistica(data: CreateEstatisticaDTO) {
     return this.repository.createEstatistica(data);
   }
 
@@ -23,7 +23,7 @@ export class EstatisticaService {
     return this.repository.findEstatisticaById(estatisticaId);
   }
 
-  async updateEstatistica(estatisticaId: number, newEstatistica: EstatisticaDTO) {
+  async updateEstatistica(estatisticaId: number, newEstatistica: UpdateEstatisticaDTO) {
     if (!estatisticaId) throw new ApiError('estatisticaId não fornecido', 400);
 
     const estatistica = await this.repository.findEstatisticaById(estatisticaId);
@@ -45,10 +45,6 @@ export class EstatisticaService {
     if (newEstatistica.golsContra) estatistica.golsContra = newEstatistica.golsContra;
 
     if (newEstatistica.saldo) estatistica.saldo = newEstatistica.saldo;
-
-    if (newEstatistica.campeonatoId) estatistica.campeonatoId = newEstatistica.campeonatoId;
-
-    if (newEstatistica.clubeId) estatistica.clubeId = newEstatistica.clubeId;
 
     const updatedEstatistica = await this.repository.updateEstatistica(
       estatisticaId,

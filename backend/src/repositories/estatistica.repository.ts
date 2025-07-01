@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma';
-import { EstatisticaDTO } from '../types/estatistica';
+import { CreateEstatisticaDTO, UpdateEstatisticaDTO } from '../schemas/estatistica.schema';
 
 export class EstatisticaRepository {
-  async createEstatistica(estatisticaDTO: EstatisticaDTO) {
+  async createEstatistica(estatisticaDTO: CreateEstatisticaDTO) {
     return prisma.estatistica.create({ data: estatisticaDTO });
   }
 
@@ -14,7 +14,7 @@ export class EstatisticaRepository {
     return prisma.estatistica.findUnique({ where: { id: estatisticaId } });
   }
 
-  async updateEstatistica(estatisticaId: number, newEstatistica: EstatisticaDTO) {
+  async updateEstatistica(estatisticaId: number, newEstatistica: UpdateEstatisticaDTO) {
     return prisma.estatistica.update({ where: { id: estatisticaId }, data: newEstatistica });
   }
 

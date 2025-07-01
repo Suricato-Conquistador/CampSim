@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma';
-import { ClubeDTO } from '../types/clube';
+import { CreateClubeDTO, UpdateClubeDTO } from '../schemas/clube.schema';
 
 export class ClubeRepository {
-  async createClube(clubeDTO: ClubeDTO) {
+  async createClube(clubeDTO: CreateClubeDTO) {
     return prisma.clube.create({ data: clubeDTO });
   }
 
@@ -14,7 +14,7 @@ export class ClubeRepository {
     return prisma.clube.findUnique({ where: { id: clubeId } });
   }
 
-  async updateClube(clubeId: number, newClube: ClubeDTO) {
+  async updateClube(clubeId: number, newClube: UpdateClubeDTO) {
     return prisma.clube.update({ where: { id: clubeId }, data: newClube });
   }
 

@@ -1,11 +1,11 @@
 import { ClubeRepository } from '../repositories/clube.repository';
-import { ClubeDTO } from '../types/clube';
+import { CreateClubeDTO, UpdateClubeDTO } from '../schemas/clube.schema';
 import { ApiError } from '../utils/apiError';
 
 export class ClubeService {
   private repository = new ClubeRepository();
 
-  async createClube(data: ClubeDTO) {
+  async createClube(data: CreateClubeDTO) {
     return this.repository.createClube(data);
   }
 
@@ -23,15 +23,13 @@ export class ClubeService {
     return clube;
   }
 
-  async updateClube(clubeId: number, newClube: ClubeDTO) {
+  async updateClube(clubeId: number, newClube: UpdateClubeDTO) {
     if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
     const clube = await this.repository.findClubeById(clubeId);
 
     if (!clube) throw new ApiError('Clube não encontrado', 404);
-
-    if (newClube.nome) clube.nome = newClube.nome;
-
+    
     if (newClube.imagem) clube.imagem = newClube.imagem;
 
     const updatedClube = await this.repository.updateClube(clubeId, clube);

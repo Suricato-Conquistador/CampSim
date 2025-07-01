@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma';
-import { PartidaDTO } from '../types/partida';
+import { CreatePartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
 
 export class PartidaRepository {
-  async createPartida(partidaDTO: PartidaDTO) {
+  async createPartida(partidaDTO: CreatePartidaDTO) {
     return prisma.partida.create({ data: partidaDTO });
   }
 
@@ -14,7 +14,7 @@ export class PartidaRepository {
     return prisma.partida.findUnique({ where: { id: partidaId } });
   }
 
-  async updatePartida(partidaId: number, newPartida: PartidaDTO) {
+  async updatePartida(partidaId: number, newPartida: UpdatePartidaDTO) {
     return prisma.partida.update({ where: { id: partidaId }, data: newPartida });
   }
 

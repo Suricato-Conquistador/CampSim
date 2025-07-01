@@ -1,11 +1,11 @@
 import { PartidaRepository } from '../repositories/partida.repository';
-import { PartidaDTO } from '../types/partida';
+import { CreatePartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
 import { ApiError } from '../utils/apiError';
 
 export class PartidaService {
   private repository = new PartidaRepository();
 
-  async createPartida(data: PartidaDTO) {
+  async createPartida(data: CreatePartidaDTO) {
     return this.repository.createPartida(data);
   }
 
@@ -23,7 +23,7 @@ export class PartidaService {
     return partida;
   }
 
-  async updatePartida(partidaId: number, newPartida: PartidaDTO) {
+  async updatePartida(partidaId: number, newPartida: UpdatePartidaDTO) {
     if (!partidaId) throw new ApiError('partidaId não fornecido', 400);
 
     const partida = await this.repository.findPartidaById(partidaId);
@@ -33,12 +33,6 @@ export class PartidaService {
     if (newPartida.golsMandante) partida.golsMandante = newPartida.golsMandante;
 
     if (newPartida.golsVisitante) partida.golsVisitante = newPartida.golsVisitante;
-
-    if (newPartida.clubeMandanteId) partida.clubeMandanteId = newPartida.clubeMandanteId;
-
-    if (newPartida.clubeVisitanteId) partida.clubeVisitanteId = newPartida.clubeVisitanteId;
-
-    if (newPartida.rodadaId) partida.rodadaId = newPartida.rodadaId;
 
     const updatedPartida = await this.repository.updatePartida(partidaId, partida);
 
