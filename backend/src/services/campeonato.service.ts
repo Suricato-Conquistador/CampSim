@@ -3,6 +3,7 @@ import {
     CreateCampeonatoDTO,
     UpdateCampeonatoDTO,
     createCampeonatoSchema,
+    updateCampeonatoSchema,
 } from '../schemas/campeonato.schema';
 import { ApiError } from '../utils/apiError';
 
@@ -34,7 +35,7 @@ export class CampeonatoService {
     }
 
     async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
-        const parsed = createCampeonatoSchema.safeParse(newCampeonato);
+        const parsed = updateCampeonatoSchema.safeParse(newCampeonato);
 
         if (!parsed.success) {
             throw new ApiError(JSON.stringify(parsed.error.format()));
