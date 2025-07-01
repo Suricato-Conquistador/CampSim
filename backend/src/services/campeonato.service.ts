@@ -1,22 +1,11 @@
 import { CampeonatoRepository } from '../repositories/campeonato.repository';
-import {
-    CreateCampeonatoDTO,
-    UpdateCampeonatoDTO,
-    createCampeonatoSchema,
-    updateCampeonatoSchema,
-} from '../schemas/campeonato.schema';
+import { CreateCampeonatoDTO, UpdateCampeonatoDTO } from '../schemas/campeonato.schema';
 import { ApiError } from '../utils/apiError';
 
 export class CampeonatoService {
     private repository = new CampeonatoRepository();
 
     async createCampeonato(data: CreateCampeonatoDTO) {
-        const parsed = createCampeonatoSchema.safeParse(data);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         return this.repository.createCampeonato(data);
     }
 
@@ -35,25 +24,13 @@ export class CampeonatoService {
     }
 
     async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
-        const parsed = updateCampeonatoSchema.safeParse(newCampeonato);
-
-        if (!parsed.success) {
-            throw new ApiError(JSON.stringify(parsed.error.format()));
-        }
-
         if (!campeonatoId) throw new ApiError('campeonatoId não fornecido', 400);
 
         const campeonato = await this.repository.findCampeonatoById(campeonatoId);
 
         if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
 
-        if (newCampeonato.nome) campeonato.nome = newCampeonato.nome;
-
-        if (newCampeonato.formato) campeonato.formato = newCampeonato.formato;
-
-        if (newCampeonato.finalizado) campeonato.finalizado = newCampeonato.finalizado;
-
-        const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, campeonato);
+        const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, newCampeonato);
 
         return updatedCampeonato;
     }
