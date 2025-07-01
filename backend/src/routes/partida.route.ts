@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
-  createPartida,
-  getAllPartidas,
-  getPartidaById,
-  updatePartida,
-  deletePartida,
+    createPartida,
+    getAllPartidas,
+    getPartidaById,
+    updatePartida,
+    deletePartida,
 } from '../controllers/partida.controller';
 import { authenticateToken } from '../middleware/auth';
 

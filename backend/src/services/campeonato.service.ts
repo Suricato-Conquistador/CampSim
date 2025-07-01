@@ -1,70 +1,73 @@
 import { CampeonatoRepository } from '../repositories/campeonato.repository';
-import { CreateCampeonatoDTO, UpdateCampeonatoDTO, createCampeonatoSchema } from '../schemas/campeonato.schema'; 
+import {
+    CreateCampeonatoDTO,
+    UpdateCampeonatoDTO,
+    createCampeonatoSchema,
+} from '../schemas/campeonato.schema';
 import { ApiError } from '../utils/apiError';
 
 export class CampeonatoService {
-  private repository = new CampeonatoRepository();
+    private repository = new CampeonatoRepository();
 
-  async createCampeonato(data: CreateCampeonatoDTO) {
-    const parsed = createCampeonatoSchema.safeParse(data);
+    async createCampeonato(data: CreateCampeonatoDTO) {
+        const parsed = createCampeonatoSchema.safeParse(data);
 
-    if(!parsed.success) {
-      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+        if (!parsed.success) {
+            throw new ApiError(JSON.stringify(parsed.error.format()));
+        }
+
+        return this.repository.createCampeonato(data);
     }
 
-    return this.repository.createCampeonato(data);
-  }
-
-  async getAllCampeonatos() {
-    return this.repository.findAllCampeonatos();
-  }
-
-  async getCampeonatoById(campeonatoId: number) {
-    if (!campeonatoId) throw new ApiError('campeonatoId não fornecido', 400);
-
-    const campeonato = await this.repository.findCampeonatoById(campeonatoId);
-
-    if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
-
-    return campeonato;
-  }
-
-  async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
-    const parsed = createCampeonatoSchema.safeParse(newCampeonato);
-
-    if(!parsed.success) {
-      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+    async getAllCampeonatos() {
+        return this.repository.findAllCampeonatos();
     }
 
-    
-    if (!campeonatoId) throw new ApiError('campeonatoId não fornecido', 400);
+    async getCampeonatoById(campeonatoId: number) {
+        if (!campeonatoId) throw new ApiError('campeonatoId não fornecido', 400);
 
-    const campeonato = await this.repository.findCampeonatoById(campeonatoId);
+        const campeonato = await this.repository.findCampeonatoById(campeonatoId);
 
-    if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
+        if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
 
-    if (newCampeonato.nome) campeonato.nome = newCampeonato.nome;
+        return campeonato;
+    }
 
-    if (newCampeonato.formato) campeonato.formato = newCampeonato.formato;
+    async updateCampeonato(campeonatoId: number, newCampeonato: UpdateCampeonatoDTO) {
+        const parsed = createCampeonatoSchema.safeParse(newCampeonato);
 
-    if (newCampeonato.finalizado) campeonato.finalizado = newCampeonato.finalizado;
+        if (!parsed.success) {
+            throw new ApiError(JSON.stringify(parsed.error.format()));
+        }
 
-    const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, campeonato);
+        if (!campeonatoId) throw new ApiError('campeonatoId não fornecido', 400);
 
-    return updatedCampeonato;
-  }
+        const campeonato = await this.repository.findCampeonatoById(campeonatoId);
 
-  async deleteCampeonato(campeonatoId: number) {
-    if (!campeonatoId) throw new ApiError('campeonatoId não encontrado', 400);
+        if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
 
-    const campeonato = await this.repository.findCampeonatoById(campeonatoId);
+        if (newCampeonato.nome) campeonato.nome = newCampeonato.nome;
 
-    if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
+        if (newCampeonato.formato) campeonato.formato = newCampeonato.formato;
 
-    const result = await this.repository.deleteCampeonato(campeonatoId);
+        if (newCampeonato.finalizado) campeonato.finalizado = newCampeonato.finalizado;
 
-    if (!result) throw new ApiError('Erro ao remover campeonato');
+        const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, campeonato);
 
-    return result;
-  }
+        return updatedCampeonato;
+    }
+
+    async deleteCampeonato(campeonatoId: number) {
+        if (!campeonatoId) throw new ApiError('campeonatoId não encontrado', 400);
+
+        const campeonato = await this.repository.findCampeonatoById(campeonatoId);
+
+        if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
+
+        const result = await this.repository.deleteCampeonato(campeonatoId);
+
+        if (!result) throw new ApiError('Erro ao remover campeonato');
+
+        return result;
+    }
 }

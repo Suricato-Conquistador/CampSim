@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
-  createEstatistica,
-  getAllEstatisticas,
-  getEstatisticaById,
-  updateEstatistica,
-  deleteEstatistica,
+    createEstatistica,
+    getAllEstatisticas,
+    getEstatisticaById,
+    updateEstatistica,
+    deleteEstatistica,
 } from '../controllers/estatistica.controller';
 import { authenticateToken } from '../middleware/auth';
 

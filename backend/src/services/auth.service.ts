@@ -7,40 +7,40 @@ import { ApiError } from '../utils/apiError';
 import { loginSchema, registerSchema } from '../schemas/auth.schema';
 
 export class AuthService {
-  private repository = new AuthRepository();
+    private repository = new AuthRepository();
 
-  async register(data: RegisterDTO) {
-    const parsed = registerSchema.safeParse(data);
+    async register(data: RegisterDTO) {
+        const parsed = registerSchema.safeParse(data);
 
-    if(!parsed.success) {
-      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+        if (!parsed.success) {
+            throw new ApiError(JSON.stringify(parsed.error.format()));
+        }
+
+        const existing = await this.repository.findUserByEmail(data.email);
+
+        if (existing) throw new ApiError('Email já cadastrado', 409);
+
+        const hashed = await bcrypt.hash(data.senha, 10);
+        return this.repository.createUser({ ...data, senha: hashed });
     }
 
-    const existing = await this.repository.findUserByEmail(data.email);
+    async login(data: LoginDTO) {
+        const parsed = loginSchema.safeParse(data);
 
-    if (existing) throw new ApiError('Email já cadastrado', 409);
+        if (!parsed.success) {
+            throw new ApiError(JSON.stringify(parsed.error.format()));
+        }
 
-    const hashed = await bcrypt.hash(data.senha, 10);
-    return this.repository.createUser({ ...data, senha: hashed });
-  }
+        const user = await this.repository.findUserByEmail(data.email);
 
-  async login(data: LoginDTO) {
-    const parsed = loginSchema.safeParse(data);
+        if (!user) throw new ApiError('Credenciais inválidas', 401);
 
-    if(!parsed.success) {
-      throw new ApiError(`Dados inválidos: ${JSON.stringify(parsed.error.format())}`);
+        const match = await bcrypt.compare(data.senha, user.senha);
+
+        if (!match) throw new ApiError('Credenciais inválidas', 401);
+
+        const token = jwt.sign({ sub: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1d' });
+
+        return { token };
     }
-
-    const user = await this.repository.findUserByEmail(data.email);
-
-    if (!user) throw new ApiError('Credenciais inválidas', 401);
-
-    const match = await bcrypt.compare(data.senha, user.senha);
-
-    if (!match) throw new ApiError('Credenciais inválidas', 401);
-
-    const token = jwt.sign({ sub: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1d' });
-
-    return { token };
-  }
 }

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const createClubeSchema = z.object({
     nome: z.string().min(4, 'O nome deve ter ao menos 4 caracteres'),

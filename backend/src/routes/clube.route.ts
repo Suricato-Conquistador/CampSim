@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
-  createClube,
-  getAllClubes,
-  getClubeById,
-  updateClube,
-  deleteClube,
+    createClube,
+    getAllClubes,
+    getClubeById,
+    updateClube,
+    deleteClube,
 } from '../controllers/clube.controller';
 import { authenticateToken } from '../middleware/auth';
 
