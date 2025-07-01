@@ -1,8 +1,8 @@
 import { prisma } from '../config/prisma';
-import { RodadaDTO } from '../types/rodada';
+import { CreateRodadaDTO, UpdateRodadaDTO } from '../schemas/rodada.schema';
 
 export default class RodadaRepository {
-  async createRodada(rodadaDTO: RodadaDTO) {
+  async createRodada(rodadaDTO: CreateRodadaDTO) {
     return prisma.rodada.create({ data: rodadaDTO });
   }
 
@@ -14,7 +14,7 @@ export default class RodadaRepository {
     return prisma.rodada.findUnique({ where: { id: rodadaId } });
   }
 
-  async updateRodada(rodadaId: number, newRodada: RodadaDTO) {
+  async updateRodada(rodadaId: number, newRodada: UpdateRodadaDTO) {
     return prisma.rodada.update({ where: { id: rodadaId }, data: newRodada });
   }
 
