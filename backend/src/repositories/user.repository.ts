@@ -1,12 +1,12 @@
 import { prisma } from '../config/prisma';
-import { UserDTO } from '../schemas/auth.schema';
+import { UpdateUserDTO } from '../schemas/user.schema';
 
 export class UserRepository {
   async findUserById(userId: number) {
     return prisma.user.findUnique({ where: { id: userId } });
   }
 
-  async updateUser(userId: number, newUser: UserDTO) {
+  async updateUser(userId: number, newUser: UpdateUserDTO) {
     return prisma.user.update({ where: { id: userId }, data: newUser });
   }
 

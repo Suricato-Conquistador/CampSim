@@ -6,4 +6,4 @@ export const updateUserSchema = z.object({
     senha: z.string().min(7, 'A senha deve ter ao menos 7 caracteres'),
   });
   
-  export type UpdateUserDTO = z.infer<typeof updateUserSchema>;
+export type UpdateUserDTO = z.infer<typeof updateUserSchema>;

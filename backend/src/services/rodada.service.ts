@@ -1,11 +1,11 @@
 import RodadaRepository from '../repositories/rodada.repository';
-import { RodadaDTO } from '../types/rodada';
+import { CreateRodadaDTO, UpdateRodadaDTO } from '../schemas/rodada.schema';
 import { ApiError } from '../utils/apiError';
 
 export default class RodadaService {
   private repository = new RodadaRepository();
 
-  async createRodada(data: RodadaDTO) {
+  async createRodada(data: CreateRodadaDTO) {
     return this.repository.createRodada(data);
   }
 
@@ -23,7 +23,7 @@ export default class RodadaService {
     return rodada;
   }
 
-  async updateRodada(rodadaId: number, newRodada: RodadaDTO) {
+  async updateRodada(rodadaId: number, newRodada: UpdateRodadaDTO) {
     if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
 
     const rodada = await this.repository.getRodadaById(rodadaId);
@@ -31,9 +31,7 @@ export default class RodadaService {
     if (!rodada) throw new ApiError('Rodada não encontrada', 404);
 
     if (newRodada.numero) rodada.numero = newRodada.numero;
-
-    if (newRodada.campeonatoId) rodada.campeonatoId = newRodada.campeonatoId;
-
+    
     const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
 
     return updatedRodada;
