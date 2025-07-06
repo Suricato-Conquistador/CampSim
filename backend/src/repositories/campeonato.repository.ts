@@ -30,7 +30,7 @@ export class CampeonatoRepository {
         return prisma.campeonato.findMany({
             where: filter,
             skip: (page - 1) * limit,
-            take: limit
+            take: limit,
         });
     }
 

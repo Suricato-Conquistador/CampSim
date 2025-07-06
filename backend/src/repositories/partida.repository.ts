@@ -1,13 +1,31 @@
 import { prisma } from '../config/prisma';
-import { CreatePartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
+import { CreatePartidaDTO, QueryPartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
 
 export class PartidaRepository {
     async createPartida(partidaDTO: CreatePartidaDTO) {
         return prisma.partida.create({ data: partidaDTO });
     }
 
-    async findAllPartidas() {
-        return prisma.partida.findMany();
+    async countPartidas(filter: any) {
+        return prisma.partida.count({ where: filter });
+    }
+
+    async findAllPartidas(queryPartidaDTO: QueryPartidaDTO) {
+        const { page, limit, clubeMandanteId, clubeVisitanteId, rodadaId } = queryPartidaDTO;
+
+        const filter: any = {};
+
+        if(clubeMandanteId) filter.clubeMandanteId = clubeMandanteId;
+
+        if(clubeVisitanteId) filter.clubeVisitanteId = clubeVisitanteId;
+        
+        if(rodadaId) filter.rodadaId = rodadaId;
+
+        return prisma.partida.findMany({
+            where: filter,
+            skip: (page - 1) * limit,
+            take: limit,
+        });
     }
 
     async findPartidaById(partidaId: number) {

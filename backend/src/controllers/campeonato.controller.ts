@@ -35,12 +35,13 @@ export const getAllCampeonatos = async (req: any, res: Response<SuccessDTO>) => 
         error: false,
         data: {
             meta: {
-            page: page,
-            limit: limit,
-            total: total,
-            totalPages: Math.ceil(total / limit),
+                page: page,
+                limit: limit,
+                total: total,
+                totalPages: Math.ceil(total / limit),
+            },
             campeonatos,
-        }},
+        }
     });
 };
 

@@ -12,3 +12,11 @@ export const updateClubeSchema = z.object({
 });
 
 export type UpdateClubeDTO = z.infer<typeof updateClubeSchema>;
+
+export const queryClubeSchema = z.object({
+    page: z.string().transform(Number).default("1").pipe(z.number().min(1)),
+    limit: z.string().transform(Number).default("20").pipe(z.number().min(1).max(100)),
+    nome: z.string().optional(),
+});
+
+export type QueryClubeDTO = z.infer<typeof queryClubeSchema>;

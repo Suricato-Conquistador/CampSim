@@ -1,9 +1,8 @@
 import RodadaRepository from '../repositories/rodada.repository';
 import {
     CreateRodadaDTO,
-    createRodadaSchema,
+    QueryRodadaDTO,
     UpdateRodadaDTO,
-    updateRodadaSchema,
 } from '../schemas/rodada.schema';
 import { ApiError } from '../utils/apiError';
 
@@ -14,8 +13,12 @@ export default class RodadaService {
         return this.repository.createRodada(data);
     }
 
-    async getAllRodadas() {
-        return this.repository.getAllRodadas();
+    async countCampeonatos(filter: any) {
+        return this.repository.countRodadas(filter);
+    }
+
+    async getAllRodadas(queryRodadaDTO: QueryRodadaDTO) {
+        return this.repository.getAllRodadas(queryRodadaDTO);
     }
 
     async getRodadaById(rodadaId: number) {

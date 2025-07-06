@@ -19,3 +19,12 @@ export const updateEstatisticaSchema = z.object({
 });
 
 export type UpdateEstatisticaDTO = z.infer<typeof updateEstatisticaSchema>;
+
+export const queryEstatisticaSchema = z.object({
+    page: z.string().transform(Number).default("1").pipe(z.number().min(1)),
+    limit: z.string().transform(Number).default("20").pipe(z.number().min(1).max(100)),
+    campeonatoId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    clubeId: z.string().transform(Number).pipe(z.number().min(1)).optional(), 
+});
+
+export type QueryEstatisticaDTO = z.infer<typeof queryEstatisticaSchema>;

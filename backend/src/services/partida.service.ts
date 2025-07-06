@@ -1,9 +1,8 @@
 import { PartidaRepository } from '../repositories/partida.repository';
 import {
     CreatePartidaDTO,
-    createPartidaSchema,
+    QueryPartidaDTO,
     UpdatePartidaDTO,
-    updatePartidaSchema,
 } from '../schemas/partida.schema';
 import { ApiError } from '../utils/apiError';
 
@@ -14,8 +13,12 @@ export class PartidaService {
         return this.repository.createPartida(data);
     }
 
-    async getAllPartidas() {
-        return this.repository.findAllPartidas();
+    async countPartidas(filter: any) {
+        return this.repository.countPartidas(filter);
+    }
+
+    async getAllPartidas(queryPartidaDTO: QueryPartidaDTO) {
+        return this.repository.findAllPartidas(queryPartidaDTO);
     }
 
     async getPartidasById(partidaId: number) {
