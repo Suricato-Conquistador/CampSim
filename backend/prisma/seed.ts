@@ -179,6 +179,44 @@ async function main() {
         }),
     ]);
 
+<<<<<<< HEAD
+=======
+    //Testes de pagination e limit
+
+    for (let i = 1; i < 150; i++) {
+        let camp = await prisma.campeonato.create({
+            data: { nome: `Campeonato ${i}`, userId: sandro.id },
+        });
+        let club1 = await prisma.clube.create({ data: { nome: `Clube ${i}` } });
+        let club2 = await prisma.clube.create({ data: { nome: `Clube ${i + 150}` } });
+        let stat1 = await prisma.estatistica.create({
+            data: { campeonatoId: camp.id, clubeId: club1.id },
+        });
+        let stat2 = await prisma.estatistica.create({
+            data: { campeonatoId: camp.id, clubeId: club2.id },
+        });
+        let turn = await prisma.rodada.create({ data: { numero: i, campeonatoId: camp.id } });
+        let match1 = await prisma.partida.create({
+            data: {
+                golsMandante: Math.floor(Math.random() * 10),
+                golsVisitante: Math.floor(Math.random() * 10),
+                clubeMandanteId: club1.id,
+                clubeVisitanteId: club2.id,
+                rodadaId: turn.id,
+            },
+        });
+        let match2 = await prisma.partida.create({
+            data: {
+                golsMandante: Math.floor(Math.random() * 10),
+                golsVisitante: Math.floor(Math.random() * 10),
+                clubeMandanteId: club2.id,
+                clubeVisitanteId: club1.id,
+                rodadaId: turn.id,
+            },
+        });
+    }
+
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     console.log('Seed gerada com sucesso!');
 }
 

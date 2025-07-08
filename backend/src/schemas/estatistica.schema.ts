@@ -19,3 +19,38 @@ export const updateEstatisticaSchema = z.object({
 });
 
 export type UpdateEstatisticaDTO = z.infer<typeof updateEstatisticaSchema>;
+<<<<<<< HEAD
+=======
+
+export const queryEstatisticaSchema = z.object({
+    page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
+    limit: z.string().transform(Number).default('20').pipe(z.number().min(1).max(100)),
+    campeonatoId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    clubeId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    orderBy: z
+        .string()
+        .optional()
+        .default('pontos:desc,vitorias:desc,saldo:desc,golsPro:desc,partidas:asc')
+        .refine((v) => {
+            return v.split(',').every((item) => {
+                const [field, dir] = item.split(':');
+
+                return (
+                    ['asc', 'desc'].includes(dir) &&
+                    [
+                        'pontos',
+                        'partidas',
+                        'vitorias',
+                        'empates',
+                        'derrotas',
+                        'golsPro',
+                        'golsContra',
+                        'saldo',
+                    ].includes(field)
+                );
+            });
+        }),
+});
+
+export type QueryEstatisticaDTO = z.infer<typeof queryEstatisticaSchema>;
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543

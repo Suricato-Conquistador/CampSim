@@ -16,3 +16,16 @@ export const updatePartidaSchema = z.object({
 });
 
 export type UpdatePartidaDTO = z.infer<typeof updatePartidaSchema>;
+<<<<<<< HEAD
+=======
+
+export const queryPartidaSchema = z.object({
+    page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
+    limit: z.string().transform(Number).default('20').pipe(z.number().min(1).max(100)),
+    clubeMandanteId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    clubeVisitanteId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    rodadaId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+});
+
+export type QueryPartidaDTO = z.infer<typeof queryPartidaSchema>;
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543

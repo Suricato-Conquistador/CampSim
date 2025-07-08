@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ClubeService } from '../services/clube.service';
 import { SuccessDTO } from '../types/success';
+import { queryClubeSchema } from '../schemas/clube.schema';
 
 const service = new ClubeService();
 
@@ -19,12 +20,37 @@ export const createClube = async (req: any, res: Response<SuccessDTO>) => {
 
 export const getAllClubes = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
+<<<<<<< HEAD
 
     const clubes = await service.getAllClubes();
 
     return res.status(200).json({
         error: false,
         data: clubes,
+=======
+    const { query } = req;
+    const parsedQuery = queryClubeSchema.parse(query);
+
+    const { page, limit, orderBy, sort, ...countQuery } = parsedQuery;
+
+    const total = await service.countClubes(countQuery);
+
+    const clubes = await service.getAllClubes(parsedQuery);
+
+    return res.status(200).json({
+        error: false,
+        data: {
+            meta: {
+                page: page,
+                limit: limit,
+                total: total,
+                totalPages: Math.ceil(total / limit),
+                orderBy: orderBy,
+                sort: sort,
+            },
+            clubes,
+        },
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     });
 };
 

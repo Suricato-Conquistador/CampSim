@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import RodadaService from '../services/rodada.service';
 import { SuccessDTO } from '../types/success';
+import { queryRodadaSchema } from '../schemas/rodada.schema';
 
 const service = new RodadaService();
 
@@ -19,12 +20,37 @@ export const createRodada = async (req: any, res: Response<SuccessDTO>) => {
 
 export const getAllRodadas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
+<<<<<<< HEAD
 
     const rodadas = await service.getAllRodadas();
 
     return res.status(200).json({
         error: false,
         data: rodadas,
+=======
+    const { query } = req;
+    const parsedQuery = queryRodadaSchema.parse(query);
+
+    const { page, limit, orderBy, sort, ...countQuery } = parsedQuery;
+
+    const total = await service.countCampeonatos(countQuery);
+
+    const rodadas = await service.getAllRodadas(parsedQuery);
+
+    return res.status(200).json({
+        error: false,
+        data: {
+            meta: {
+                page: page,
+                limit: limit,
+                total: total,
+                totalPages: Math.ceil(total / limit),
+                orderBy: orderBy,
+                sort: sort,
+            },
+            rodadas,
+        },
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     });
 };
 
