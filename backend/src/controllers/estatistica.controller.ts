@@ -20,7 +20,7 @@ export const createEstatistica = async (req: any, res: Response<SuccessDTO>) => 
 
 export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
-    const query = queryEstatisticaSchema.parse(req.query);   
+    const query = queryEstatisticaSchema.parse(req.query);
 
     const { page, limit, ...countQuery } = query;
 
@@ -38,7 +38,7 @@ export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) =>
                 totalPages: Math.ceil(total / limit),
             },
             estatisticas,
-        }
+        },
     });
 };
 

@@ -1,9 +1,5 @@
 import { PartidaRepository } from '../repositories/partida.repository';
-import {
-    CreatePartidaDTO,
-    QueryPartidaDTO,
-    UpdatePartidaDTO,
-} from '../schemas/partida.schema';
+import { CreatePartidaDTO, QueryPartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
 import { ApiError } from '../utils/apiError';
 
 export class PartidaService {

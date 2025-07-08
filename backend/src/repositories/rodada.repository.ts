@@ -11,18 +11,21 @@ export default class RodadaRepository {
     }
 
     async getAllRodadas(queryRodadaDTO: QueryRodadaDTO) {
-        const { page, limit, numero, campeonatoId } = queryRodadaDTO;
+        const { page, limit, numero, campeonatoId, orderBy, sort } = queryRodadaDTO;
 
         const filter: any = {};
 
-        if(numero) filter.numero = numero;
+        if (numero) filter.numero = numero;
 
-        if(campeonatoId) filter.campeonatoId = campeonatoId;
+        if (campeonatoId) filter.campeonatoId = campeonatoId;
 
         return prisma.rodada.findMany({
             where: filter,
             skip: (page - 1) * limit,
             take: limit,
+            orderBy: {
+                [orderBy]: sort,
+            },
         });
     }
 

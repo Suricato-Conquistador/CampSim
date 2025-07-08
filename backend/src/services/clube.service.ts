@@ -1,9 +1,5 @@
 import { ClubeRepository } from '../repositories/clube.repository';
-import {
-    CreateClubeDTO,
-    QueryClubeDTO,
-    UpdateClubeDTO,
-} from '../schemas/clube.schema';
+import { CreateClubeDTO, QueryClubeDTO, UpdateClubeDTO } from '../schemas/clube.schema';
 import { ApiError } from '../utils/apiError';
 
 export class ClubeService {

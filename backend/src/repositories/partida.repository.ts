@@ -15,11 +15,11 @@ export class PartidaRepository {
 
         const filter: any = {};
 
-        if(clubeMandanteId) filter.clubeMandanteId = clubeMandanteId;
+        if (clubeMandanteId) filter.clubeMandanteId = clubeMandanteId;
 
-        if(clubeVisitanteId) filter.clubeVisitanteId = clubeVisitanteId;
-        
-        if(rodadaId) filter.rodadaId = rodadaId;
+        if (clubeVisitanteId) filter.clubeVisitanteId = clubeVisitanteId;
+
+        if (rodadaId) filter.rodadaId = rodadaId;
 
         return prisma.partida.findMany({
             where: filter,

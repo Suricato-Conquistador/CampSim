@@ -1,5 +1,9 @@
 import { CampeonatoRepository } from '../repositories/campeonato.repository';
-import { CreateCampeonatoDTO, UpdateCampeonatoDTO, QueryCampeonatoDTO } from '../schemas/campeonato.schema';
+import {
+    CreateCampeonatoDTO,
+    UpdateCampeonatoDTO,
+    QueryCampeonatoDTO,
+} from '../schemas/campeonato.schema';
 import { ApiError } from '../utils/apiError';
 
 export class CampeonatoService {
@@ -34,7 +38,10 @@ export class CampeonatoService {
 
         if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
 
-        const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, newCampeonato);
+        const updatedCampeonato = await this.repository.updateCampeonato(
+            campeonatoId,
+            newCampeonato,
+        );
 
         return updatedCampeonato;
     }

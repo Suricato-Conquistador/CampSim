@@ -1,5 +1,9 @@
 import { prisma } from '../config/prisma';
-import { CreateEstatisticaDTO, UpdateEstatisticaDTO, QueryEstatisticaDTO } from '../schemas/estatistica.schema';
+import {
+    CreateEstatisticaDTO,
+    UpdateEstatisticaDTO,
+    QueryEstatisticaDTO,
+} from '../schemas/estatistica.schema';
 
 export class EstatisticaRepository {
     async createEstatistica(estatisticaDTO: CreateEstatisticaDTO) {
@@ -15,9 +19,9 @@ export class EstatisticaRepository {
 
         const filter: any = {};
 
-        if(campeonatoId) filter.campeonatoId = campeonatoId;
-        
-        if(clubeId) filter.clubeId = clubeId;
+        if (campeonatoId) filter.campeonatoId = campeonatoId;
+
+        if (clubeId) filter.clubeId = clubeId;
 
         return prisma.estatistica.findMany({
             where: filter,

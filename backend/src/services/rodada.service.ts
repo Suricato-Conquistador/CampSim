@@ -1,9 +1,5 @@
 import RodadaRepository from '../repositories/rodada.repository';
-import {
-    CreateRodadaDTO,
-    QueryRodadaDTO,
-    UpdateRodadaDTO,
-} from '../schemas/rodada.schema';
+import { CreateRodadaDTO, QueryRodadaDTO, UpdateRodadaDTO } from '../schemas/rodada.schema';
 import { ApiError } from '../utils/apiError';
 
 export default class RodadaService {

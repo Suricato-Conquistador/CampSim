@@ -23,7 +23,7 @@ export const getAllClubes = async (req: any, res: Response<SuccessDTO>) => {
     const { query } = req;
     const parsedQuery = queryClubeSchema.parse(query);
 
-    const { page, limit, ...countQuery } = parsedQuery;
+    const { page, limit, orderBy, sort, ...countQuery } = parsedQuery;
 
     const total = await service.countClubes(countQuery);
 
@@ -37,9 +37,11 @@ export const getAllClubes = async (req: any, res: Response<SuccessDTO>) => {
                 limit: limit,
                 total: total,
                 totalPages: Math.ceil(total / limit),
+                orderBy: orderBy,
+                sort: sort,
             },
             clubes,
-        }
+        },
     });
 };
 

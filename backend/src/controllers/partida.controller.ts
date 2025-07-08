@@ -22,7 +22,7 @@ export const getAllPartidas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
     const { query } = req;
     const parsedQuery = queryPartidaSchema.parse(query);
-    
+
     const { page, limit, ...countQuery } = parsedQuery;
 
     const total = await service.countPartidas(countQuery);
@@ -39,7 +39,7 @@ export const getAllPartidas = async (req: any, res: Response<SuccessDTO>) => {
                 totalPages: Math.ceil(total / limit),
             },
             partidas,
-        }
+        },
     });
 };
 

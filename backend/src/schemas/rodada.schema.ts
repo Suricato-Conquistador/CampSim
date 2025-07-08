@@ -14,10 +14,12 @@ export const updateRodadaSchema = z.object({
 export type UpdateRodadaDTO = z.infer<typeof updateRodadaSchema>;
 
 export const queryRodadaSchema = z.object({
-    page: z.string().transform(Number).default("1").pipe(z.number().min(1)),
-    limit: z.string().transform(Number).default("20").pipe(z.number().min(1).max(100)),
+    page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
+    limit: z.string().transform(Number).default('20').pipe(z.number().min(1).max(100)),
     numero: z.string().transform(Number).pipe(z.number().min(1)).optional(),
     campeonatoId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    orderBy: z.enum(['numero']).optional().default('numero'),
+    sort: z.enum(['asc', 'desc']).optional().default('asc'),
 });
 
 export type QueryRodadaDTO = z.infer<typeof queryRodadaSchema>;

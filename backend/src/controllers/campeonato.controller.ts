@@ -25,7 +25,7 @@ export const getAllCampeonatos = async (req: any, res: Response<SuccessDTO>) => 
     const queryWithUserId = { ...query, userId };
     const parsedQuery = queryCampeonatoSchema.parse(queryWithUserId);
 
-    const {  page, limit, ...countQuery } = parsedQuery;
+    const { page, limit, ...countQuery } = parsedQuery;
 
     const total = await service.countCampeonatos(countQuery);
 
@@ -41,7 +41,7 @@ export const getAllCampeonatos = async (req: any, res: Response<SuccessDTO>) => 
                 totalPages: Math.ceil(total / limit),
             },
             campeonatos,
-        }
+        },
     });
 };
 

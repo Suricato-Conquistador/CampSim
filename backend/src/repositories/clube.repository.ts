@@ -9,22 +9,25 @@ export class ClubeRepository {
     async countClubes(filter: any) {
         const { nome } = filter;
 
-        if(nome) filter.nome = { contains: nome, mode: "insensitive" };
+        if (nome) filter.nome = { contains: nome, mode: 'insensitive' };
 
         return prisma.clube.count({ where: filter });
     }
 
     async findAllClubes(queryClubeDTO: QueryClubeDTO) {
-        const { page, limit, nome } = queryClubeDTO;
+        const { page, limit, nome, orderBy, sort } = queryClubeDTO;
 
         const filter: any = {};
 
-        if(nome) filter.nome = { contains: nome, mode: "insensitive" };
+        if (nome) filter.nome = { contains: nome, mode: 'insensitive' };
 
         return prisma.clube.findMany({
             where: filter,
             skip: (page - 1) * limit,
             take: limit,
+            orderBy: {
+                [orderBy]: sort,
+            },
         });
     }
 
