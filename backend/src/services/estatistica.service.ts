@@ -2,6 +2,7 @@ import { EstatisticaRepository } from '../repositories/estatistica.repository';
 import {
     CreateEstatisticaDTO,
     UpdateEstatisticaDTO,
+    QueryEstatisticaDTO,
 } from '../schemas/estatistica.schema';
 import { ApiError } from '../utils/apiError';
 
@@ -12,8 +13,12 @@ export class EstatisticaService {
         return this.repository.createEstatistica(data);
     }
 
-    async getAllEstatisticas() {
-        return this.repository.findAllEstatisticas();
+    async countEstatisticas(filter: any) {
+        return this.repository.countEstatisticas(filter);
+    }
+
+    async getAllEstatisticas(queryEstatisticaDTO: QueryEstatisticaDTO) {
+        return this.repository.findAllEstatisticas(queryEstatisticaDTO);
     }
 
     async getEstatisticaById(estatisticaId: number) {

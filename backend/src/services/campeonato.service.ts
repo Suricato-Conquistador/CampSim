@@ -1,5 +1,9 @@
 import { CampeonatoRepository } from '../repositories/campeonato.repository';
-import { CreateCampeonatoDTO, UpdateCampeonatoDTO } from '../schemas/campeonato.schema';
+import {
+    CreateCampeonatoDTO,
+    UpdateCampeonatoDTO,
+    QueryCampeonatoDTO,
+} from '../schemas/campeonato.schema';
 import { ApiError } from '../utils/apiError';
 
 export class CampeonatoService {
@@ -9,8 +13,12 @@ export class CampeonatoService {
         return this.repository.createCampeonato(data);
     }
 
-    async getAllCampeonatos() {
-        return this.repository.findAllCampeonatos();
+    async countCampeonatos(filter: any) {
+        return this.repository.countCampeonatos(filter);
+    }
+
+    async getAllCampeonatos(queryCampeonatoDTO: QueryCampeonatoDTO) {
+        return this.repository.findAllCampeonatos(queryCampeonatoDTO);
     }
 
     async getCampeonatoById(campeonatoId: number) {
@@ -30,7 +38,10 @@ export class CampeonatoService {
 
         if (!campeonato) throw new ApiError('Campeonato não encontrado', 404);
 
-        const updatedCampeonato = await this.repository.updateCampeonato(campeonatoId, newCampeonato);
+        const updatedCampeonato = await this.repository.updateCampeonato(
+            campeonatoId,
+            newCampeonato,
+        );
 
         return updatedCampeonato;
     }

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { EstatisticaService } from '../services/estatistica.service';
 import { SuccessDTO } from '../types/success';
+import { queryEstatisticaSchema } from '../schemas/estatistica.schema';
 
 const service = new EstatisticaService();
 
@@ -19,12 +20,26 @@ export const createEstatistica = async (req: any, res: Response<SuccessDTO>) => 
 
 export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
+    const query = queryEstatisticaSchema.parse(req.query);
 
-    const estatisticas = await service.getAllEstatisticas();
+    const { page, limit, orderBy, ...countQuery } = query;
+
+    const total = await service.countEstatisticas(countQuery);
+
+    const estatisticas = await service.getAllEstatisticas(query);
 
     return res.status(200).json({
         error: false,
-        data: estatisticas,
+        data: {
+            meta: {
+                page: page,
+                limit: limit,
+                total: total,
+                totalPages: Math.ceil(total / limit),
+                orderBy: orderBy,
+            },
+            estatisticas,
+        },
     });
 };
 

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { PartidaService } from '../services/partida.service';
 import { SuccessDTO } from '../types/success';
+import { queryPartidaSchema } from '../schemas/partida.schema';
 
 const service = new PartidaService();
 
@@ -19,12 +20,26 @@ export const createPartida = async (req: any, res: Response<SuccessDTO>) => {
 
 export const getAllPartidas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
+    const { query } = req;
+    const parsedQuery = queryPartidaSchema.parse(query);
 
-    const partidas = await service.getAllPartidas();
+    const { page, limit, ...countQuery } = parsedQuery;
+
+    const total = await service.countPartidas(countQuery);
+
+    const partidas = await service.getAllPartidas(parsedQuery);
 
     return res.status(200).json({
         error: false,
-        data: partidas,
+        data: {
+            meta: {
+                page: page,
+                limit: limit,
+                total: total,
+                totalPages: Math.ceil(total / limit),
+            },
+            partidas,
+        },
     });
 };
 
