@@ -1,55 +1,102 @@
 import { ClubeRepository } from '../repositories/clube.repository';
-import { ClubeDTO } from '../types/clube';
+<<<<<<< HEAD
+import {
+    CreateClubeDTO,
+    UpdateClubeDTO,
+} from '../schemas/clube.schema';
+=======
+import { CreateClubeDTO, QueryClubeDTO, UpdateClubeDTO } from '../schemas/clube.schema';
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
 import { ApiError } from '../utils/apiError';
 
 export class ClubeService {
-  private repository = new ClubeRepository();
+    private repository = new ClubeRepository();
 
-  async createClube(data: ClubeDTO) {
-    return this.repository.createClube(data);
-  }
+    async createClube(data: CreateClubeDTO) {
+        return this.repository.createClube(data);
+    }
 
-  async getAllClubes() {
-    return this.repository.findAllClubes();
-  }
+<<<<<<< HEAD
+    async getAllClubes() {
+        return this.repository.findAllClubes();
+    }
 
-  async getClubeById(clubeId: number) {
-    if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
+    async getClubeById(clubeId: number) {
+        if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
-    const clube = await this.repository.findClubeById(clubeId);
+        const clube = await this.repository.findClubeById(clubeId);
 
-    if (!clube) throw new ApiError('Clube não encontrado', 404);
+        if (!clube) throw new ApiError('Clube não encontrado', 404);
 
-    return clube;
-  }
+        return clube;
+    }
 
-  async updateClube(clubeId: number, newClube: ClubeDTO) {
-    if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
+    async updateClube(clubeId: number, newClube: UpdateClubeDTO) {
+        if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
-    const clube = await this.repository.findClubeById(clubeId);
+        const clube = await this.repository.findClubeById(clubeId);
 
-    if (!clube) throw new ApiError('Clube não encontrado', 404);
+        if (!clube) throw new ApiError('Clube não encontrado', 404);
 
-    if (newClube.nome) clube.nome = newClube.nome;
+        const updatedClube = await this.repository.updateClube(clubeId, clube);
 
-    if (newClube.imagem) clube.imagem = newClube.imagem;
+        return updatedClube;
+    }
 
-    const updatedClube = await this.repository.updateClube(clubeId, clube);
+    async deleteClube(clubeId: number) {
+        if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
 
-    return updatedClube;
-  }
+        const clube = await this.repository.findClubeById(clubeId);
 
-  async deleteClube(clubeId: number) {
-    if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
+        if (!clube) throw new ApiError('Clube não encontrado', 404);
 
-    const clube = await this.repository.findClubeById(clubeId);
+        const result = await this.repository.deleteClube(clubeId);
 
-    if (!clube) throw new ApiError('Clube não encontrado', 404);
+        if (!result) throw new ApiError('Erro ao remover clube');
 
-    const result = await this.repository.deleteClube(clubeId);
+=======
+    async countClubes(filter: any) {
+        return this.repository.countClubes(filter);
+    }
 
-    if (!result) throw new ApiError('Erro ao remover clube');
+    async getAllClubes(queryClubeDTO: QueryClubeDTO) {
+        return this.repository.findAllClubes(queryClubeDTO);
+    }
 
-    return result;
-  }
+    async getClubeById(clubeId: number) {
+        if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
+
+        const clube = await this.repository.findClubeById(clubeId);
+
+        if (!clube) throw new ApiError('Clube não encontrado', 404);
+
+        return clube;
+    }
+
+    async updateClube(clubeId: number, newClube: UpdateClubeDTO) {
+        if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
+
+        const clube = await this.repository.findClubeById(clubeId);
+
+        if (!clube) throw new ApiError('Clube não encontrado', 404);
+
+        const updatedClube = await this.repository.updateClube(clubeId, clube);
+
+        return updatedClube;
+    }
+
+    async deleteClube(clubeId: number) {
+        if (!clubeId) throw new ApiError('clubeId não fornecido', 400);
+
+        const clube = await this.repository.findClubeById(clubeId);
+
+        if (!clube) throw new ApiError('Clube não encontrado', 404);
+
+        const result = await this.repository.deleteClube(clubeId);
+
+        if (!result) throw new ApiError('Erro ao remover clube');
+
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
+        return result;
+    }
 }

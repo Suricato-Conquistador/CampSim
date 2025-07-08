@@ -1,55 +1,104 @@
 import RodadaRepository from '../repositories/rodada.repository';
-import { RodadaDTO } from '../types/rodada';
+<<<<<<< HEAD
+import {
+    CreateRodadaDTO,
+    createRodadaSchema,
+    UpdateRodadaDTO,
+    updateRodadaSchema,
+} from '../schemas/rodada.schema';
+=======
+import { CreateRodadaDTO, QueryRodadaDTO, UpdateRodadaDTO } from '../schemas/rodada.schema';
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
 import { ApiError } from '../utils/apiError';
 
 export default class RodadaService {
-  private repository = new RodadaRepository();
+    private repository = new RodadaRepository();
 
-  async createRodada(data: RodadaDTO) {
-    return this.repository.createRodada(data);
-  }
+    async createRodada(data: CreateRodadaDTO) {
+        return this.repository.createRodada(data);
+    }
 
-  async getAllRodadas() {
-    return this.repository.getAllRodadas();
-  }
+<<<<<<< HEAD
+    async getAllRodadas() {
+        return this.repository.getAllRodadas();
+    }
 
-  async getRodadaById(rodadaId: number) {
-    if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
+    async getRodadaById(rodadaId: number) {
+        if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
 
-    const rodada = await this.repository.getRodadaById(rodadaId);
+        const rodada = await this.repository.getRodadaById(rodadaId);
 
-    if (!rodada) throw new ApiError('Rodada não encontrada', 404);
+        if (!rodada) throw new ApiError('Rodada não encontrada', 404);
 
-    return rodada;
-  }
+        return rodada;
+    }
 
-  async updateRodada(rodadaId: number, newRodada: RodadaDTO) {
-    if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
+    async updateRodada(rodadaId: number, newRodada: UpdateRodadaDTO) {
+        if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
 
-    const rodada = await this.repository.getRodadaById(rodadaId);
+        const rodada = await this.repository.getRodadaById(rodadaId);
 
-    if (!rodada) throw new ApiError('Rodada não encontrada', 404);
+        if (!rodada) throw new ApiError('Rodada não encontrada', 404);
 
-    if (newRodada.numero) rodada.numero = newRodada.numero;
+        const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
 
-    if (newRodada.campeonatoId) rodada.campeonatoId = newRodada.campeonatoId;
+        return updatedRodada;
+    }
 
-    const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
+    async deleteRodada(rodadaId: number) {
+        if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
 
-    return updatedRodada;
-  }
+        const rodada = await this.repository.getRodadaById(rodadaId);
 
-  async deleteRodada(rodadaId: number) {
-    if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
+        if (!rodada) throw new ApiError('Rodada não encontrada', 404);
 
-    const rodada = await this.repository.getRodadaById(rodadaId);
+        const result = await this.repository.deleteRodada(rodadaId);
 
-    if (!rodada) throw new ApiError('Rodada não encontrada', 404);
+        if (!result) throw new ApiError('Erro ao remover rodada');
 
-    const result = await this.repository.deleteRodada(rodadaId);
+=======
+    async countCampeonatos(filter: any) {
+        return this.repository.countRodadas(filter);
+    }
 
-    if (!result) throw new ApiError('Erro ao remover rodada');
+    async getAllRodadas(queryRodadaDTO: QueryRodadaDTO) {
+        return this.repository.getAllRodadas(queryRodadaDTO);
+    }
 
-    return result;
-  }
+    async getRodadaById(rodadaId: number) {
+        if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
+
+        const rodada = await this.repository.getRodadaById(rodadaId);
+
+        if (!rodada) throw new ApiError('Rodada não encontrada', 404);
+
+        return rodada;
+    }
+
+    async updateRodada(rodadaId: number, newRodada: UpdateRodadaDTO) {
+        if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
+
+        const rodada = await this.repository.getRodadaById(rodadaId);
+
+        if (!rodada) throw new ApiError('Rodada não encontrada', 404);
+
+        const updatedRodada = await this.repository.updateRodada(rodadaId, rodada);
+
+        return updatedRodada;
+    }
+
+    async deleteRodada(rodadaId: number) {
+        if (!rodadaId) throw new ApiError('rodadaId não fornecido', 400);
+
+        const rodada = await this.repository.getRodadaById(rodadaId);
+
+        if (!rodada) throw new ApiError('Rodada não encontrada', 404);
+
+        const result = await this.repository.deleteRodada(rodadaId);
+
+        if (!result) throw new ApiError('Erro ao remover rodada');
+
+>>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
+        return result;
+    }
 }
