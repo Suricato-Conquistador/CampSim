@@ -4,6 +4,7 @@ import {
     UpdateCampeonatoDTO,
     QueryCampeonatoDTO,
 } from '../schemas/campeonato.schema';
+import { parseOrderBy } from '../utils/parseOrder';
 
 export class CampeonatoRepository {
     async createCampeonato(campeonatoDTO: CreateCampeonatoDTO) {
@@ -19,7 +20,7 @@ export class CampeonatoRepository {
     }
 
     async findAllCampeonatos(queryCampeonatoDTO: QueryCampeonatoDTO) {
-        const { page, limit, nome, formato, finalizado } = queryCampeonatoDTO;
+        const { page, limit, nome, formato, finalizado, orderBy } = queryCampeonatoDTO;
 
         const filter: any = {};
 
@@ -35,6 +36,7 @@ export class CampeonatoRepository {
             where: filter,
             skip: (page - 1) * limit,
             take: limit,
+            orderBy: parseOrderBy(orderBy),
         });
     }
 

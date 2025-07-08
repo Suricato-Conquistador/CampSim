@@ -33,6 +33,25 @@ export const queryCampeonatoSchema = z.object({
         .transform((v) => v === 'true')
         .optional(),
     userId: z.number(),
+    orderBy: z
+        .string()
+        .optional()
+        .default('nome:asc,formato:asc,finalizado:asc')
+        .refine(
+            (v) => {
+                return v.split(',').every((item) => {
+                    const [field, dir] = item.split(':');
+
+                    return (
+                        ['asc', 'desc'].includes(dir) &&
+                        ['nome', 'formato', 'finalizado'].includes(field)
+                    );
+                });
+            },
+            {
+                message: 'Formato inválido em orderBy, use "campo:asc" ou "campo.desc"',
+            },
+        ),
 });
 
 export type QueryCampeonatoDTO = z.infer<typeof queryCampeonatoSchema>;

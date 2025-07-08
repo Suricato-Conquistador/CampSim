@@ -22,7 +22,7 @@ export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) =>
     const userId = req.userId;
     const query = queryEstatisticaSchema.parse(req.query);
 
-    const { page, limit, ...countQuery } = query;
+    const { page, limit, orderBy, ...countQuery } = query;
 
     const total = await service.countEstatisticas(countQuery);
 
@@ -36,6 +36,7 @@ export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) =>
                 limit: limit,
                 total: total,
                 totalPages: Math.ceil(total / limit),
+                orderBy: orderBy,
             },
             estatisticas,
         },

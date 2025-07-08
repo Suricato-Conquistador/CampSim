@@ -4,6 +4,7 @@ import {
     UpdateEstatisticaDTO,
     QueryEstatisticaDTO,
 } from '../schemas/estatistica.schema';
+import { parseOrderBy } from '../utils/parseOrder';
 
 export class EstatisticaRepository {
     async createEstatistica(estatisticaDTO: CreateEstatisticaDTO) {
@@ -15,7 +16,7 @@ export class EstatisticaRepository {
     }
 
     async findAllEstatisticas(queryEstatisticaDTO: QueryEstatisticaDTO) {
-        const { page, limit, campeonatoId, clubeId } = queryEstatisticaDTO;
+        const { page, limit, campeonatoId, clubeId, orderBy } = queryEstatisticaDTO;
 
         const filter: any = {};
 
@@ -27,6 +28,7 @@ export class EstatisticaRepository {
             where: filter,
             skip: (page - 1) * limit,
             take: limit,
+            orderBy: parseOrderBy(orderBy),
         });
     }
 

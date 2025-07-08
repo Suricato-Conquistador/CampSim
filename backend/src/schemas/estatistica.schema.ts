@@ -25,6 +25,29 @@ export const queryEstatisticaSchema = z.object({
     limit: z.string().transform(Number).default('20').pipe(z.number().min(1).max(100)),
     campeonatoId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
     clubeId: z.string().transform(Number).pipe(z.number().min(1)).optional(),
+    orderBy: z
+        .string()
+        .optional()
+        .default('pontos:desc,vitorias:desc,saldo:desc,golsPro:desc,partidas:asc')
+        .refine((v) => {
+            return v.split(',').every((item) => {
+                const [field, dir] = item.split(':');
+
+                return (
+                    ['asc', 'desc'].includes(dir) &&
+                    [
+                        'pontos',
+                        'partidas',
+                        'vitorias',
+                        'empates',
+                        'derrotas',
+                        'golsPro',
+                        'golsContra',
+                        'saldo',
+                    ].includes(field)
+                );
+            });
+        }),
 });
 
 export type QueryEstatisticaDTO = z.infer<typeof queryEstatisticaSchema>;
