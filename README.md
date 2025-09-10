@@ -61,7 +61,7 @@ A estrutura do banco de dados seguiu o seguinte modelo:
 - [X] Criar seeders iniciais
 - [X] Implementar autenticação com JWT e bcrypt
 - [X] Desenvolver os módulos da aplicação
-- [ ] Criar validações de entrada
+- [X] Criar validações de entrada
 - [X] Implementar a estrutura de repositório, service e controller
 - [X] Criar rotas RESTful para cada entidade
 - [X] Proteger rotas com autenticação
