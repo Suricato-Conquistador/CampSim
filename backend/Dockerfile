@@ -1,28 +1,21 @@
-# Etapa 1: build da aplicação
-FROM node:20-alpine AS build
+FROM node:20-bullseye-slim AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 COPY . .
 RUN npm run build
 
-# Etapa 2: imagem final
-FROM node:20-alpine
+FROM node:20-bullseye-slim
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 COPY --from=build /app/dist ./dist
 COPY prisma ./prisma
 
-# Gere o Prisma Client no container final
-RUN npx prisma generate
-
 EXPOSE 3500
-
-CMD ["node", "dist/index.js"]

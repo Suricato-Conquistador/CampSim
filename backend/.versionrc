@@ -1,11 +1,11 @@
 {
   "types": [
-    { "type": "feat", "section": "Funcionalidades" },
-    { "type": "fix", "section": "Correções" },
-    { "type": "refact", "section": "Refatorações" },
-    { "type": "docs", "section": "Documentação" },
-    { "type": "test", "section": "Testes" },
-    { "type": "chore", "section": "Tarefas" },
+    { "type": "feat", "section": "Features" },
+    { "type": "fix", "section": "Fixes" },
+    { "type": "refact", "section": "Refactors" },
+    { "type": "docs", "section": "Documentation" },
+    { "type": "test", "section": "Tests" },
+    { "type": "chore", "section": "Tasks" },
     { "type": "merge", "section": "Merges" }
   ],
   "commitUrlFormat": "https://github.com/Suricato-Conquistador/CampSim/commit/{{hash}}",

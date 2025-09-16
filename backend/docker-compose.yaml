@@ -1,14 +1,14 @@
-version: '3.8'
-
 services:
   app:
     build: .
     ports:
       - '3500:3500'
     environment:
+      PORT: 3500
       DATABASE_URL: postgres://postgres:postgres@db:5432/campsim
     depends_on:
       - db
+    command: sh -c "npm run db:push && node dist/server.js"
 
   db:
     image: postgres:15
