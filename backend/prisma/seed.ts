@@ -179,8 +179,6 @@ async function main() {
         }),
     ]);
 
-<<<<<<< HEAD
-=======
     //Testes de pagination e limit
 
     for (let i = 1; i < 150; i++) {
@@ -216,7 +214,6 @@ async function main() {
         });
     }
 
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     console.log('Seed gerada com sucesso!');
 }
 

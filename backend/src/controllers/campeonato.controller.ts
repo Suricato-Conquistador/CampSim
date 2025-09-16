@@ -21,14 +21,7 @@ export const createCampeonato = async (req: any, res: Response<SuccessDTO>) => {
 
 export const getAllCampeonatos = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
-<<<<<<< HEAD
 
-    const campeonatos = await service.getAllCampeonatos();
-
-    return res.status(200).json({
-        error: false,
-        data: campeonatos,
-=======
     const { query } = req;
     const queryWithUserId = { ...query, userId };
     const parsedQuery = queryCampeonatoSchema.parse(queryWithUserId);
@@ -51,7 +44,6 @@ export const getAllCampeonatos = async (req: any, res: Response<SuccessDTO>) => 
             },
             campeonatos,
         },
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     });
 };
 

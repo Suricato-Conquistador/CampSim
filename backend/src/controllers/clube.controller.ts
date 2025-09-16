@@ -20,14 +20,7 @@ export const createClube = async (req: any, res: Response<SuccessDTO>) => {
 
 export const getAllClubes = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
-<<<<<<< HEAD
 
-    const clubes = await service.getAllClubes();
-
-    return res.status(200).json({
-        error: false,
-        data: clubes,
-=======
     const { query } = req;
     const parsedQuery = queryClubeSchema.parse(query);
 
@@ -50,7 +43,6 @@ export const getAllClubes = async (req: any, res: Response<SuccessDTO>) => {
             },
             clubes,
         },
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     });
 };
 

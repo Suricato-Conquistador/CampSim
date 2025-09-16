@@ -1,29 +1,12 @@
 import { prisma } from '../config/prisma';
-<<<<<<< HEAD
-import { CreatePartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
-=======
+
 import { CreatePartidaDTO, QueryPartidaDTO, UpdatePartidaDTO } from '../schemas/partida.schema';
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
 
 export class PartidaRepository {
     async createPartida(partidaDTO: CreatePartidaDTO) {
         return prisma.partida.create({ data: partidaDTO });
     }
 
-<<<<<<< HEAD
-    async findAllPartidas() {
-        return prisma.partida.findMany();
-    }
-
-    async findPartidaById(partidaId: number) {
-        return prisma.partida.findUnique({ where: { id: partidaId } });
-    }
-
-    async updatePartida(partidaId: number, newPartida: UpdatePartidaDTO) {
-        return prisma.partida.update({ where: { id: partidaId }, data: newPartida });
-    }
-
-=======
     async countPartidas(filter: any) {
         return prisma.partida.count({ where: filter });
     }
@@ -54,7 +37,6 @@ export class PartidaRepository {
         return prisma.partida.update({ where: { id: partidaId }, data: newPartida });
     }
 
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     async deletePartida(partidaId: number) {
         return prisma.partida.delete({ where: { id: partidaId } });
     }

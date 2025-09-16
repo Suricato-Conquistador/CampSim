@@ -20,14 +20,7 @@ export const createEstatistica = async (req: any, res: Response<SuccessDTO>) => 
 
 export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
-<<<<<<< HEAD
 
-    const estatisticas = await service.getAllEstatisticas();
-
-    return res.status(200).json({
-        error: false,
-        data: estatisticas,
-=======
     const query = queryEstatisticaSchema.parse(req.query);
 
     const { page, limit, orderBy, ...countQuery } = query;
@@ -48,7 +41,6 @@ export const getAllEstatisticas = async (req: any, res: Response<SuccessDTO>) =>
             },
             estatisticas,
         },
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     });
 };
 

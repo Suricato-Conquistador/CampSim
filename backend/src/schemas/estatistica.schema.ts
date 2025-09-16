@@ -19,8 +19,6 @@ export const updateEstatisticaSchema = z.object({
 });
 
 export type UpdateEstatisticaDTO = z.infer<typeof updateEstatisticaSchema>;
-<<<<<<< HEAD
-=======
 
 export const queryEstatisticaSchema = z.object({
     page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
@@ -53,4 +51,3 @@ export const queryEstatisticaSchema = z.object({
 });
 
 export type QueryEstatisticaDTO = z.infer<typeof queryEstatisticaSchema>;
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543

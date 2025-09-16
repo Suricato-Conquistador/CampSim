@@ -12,8 +12,6 @@ export const updateRodadaSchema = z.object({
 });
 
 export type UpdateRodadaDTO = z.infer<typeof updateRodadaSchema>;
-<<<<<<< HEAD
-=======
 
 export const queryRodadaSchema = z.object({
     page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
@@ -25,4 +23,3 @@ export const queryRodadaSchema = z.object({
 });
 
 export type QueryRodadaDTO = z.infer<typeof queryRodadaSchema>;
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543

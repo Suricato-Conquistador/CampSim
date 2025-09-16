@@ -5,10 +5,7 @@ export const createCampeonatoSchema = z.object({
     nome: z.string().min(4, 'O nome deve ter ao menos 4 caracteres'),
     formato: z.nativeEnum(Formato),
     finalizado: z.boolean(),
-<<<<<<< HEAD
-=======
     userId: z.number().gt(0, 'O userId deve ser um número maior que 0'),
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
 });
 
 export type CreateCampeonatoDTO = z.infer<typeof createCampeonatoSchema>;
@@ -20,8 +17,6 @@ export const updateCampeonatoSchema = z.object({
 });
 
 export type UpdateCampeonatoDTO = z.infer<typeof updateCampeonatoSchema>;
-<<<<<<< HEAD
-=======
 
 export const queryCampeonatoSchema = z.object({
     page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
@@ -60,4 +55,3 @@ export const queryCampeonatoSchema = z.object({
 });
 
 export type QueryCampeonatoDTO = z.infer<typeof queryCampeonatoSchema>;
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543

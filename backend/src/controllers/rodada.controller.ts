@@ -20,14 +20,7 @@ export const createRodada = async (req: any, res: Response<SuccessDTO>) => {
 
 export const getAllRodadas = async (req: any, res: Response<SuccessDTO>) => {
     const userId = req.userId;
-<<<<<<< HEAD
 
-    const rodadas = await service.getAllRodadas();
-
-    return res.status(200).json({
-        error: false,
-        data: rodadas,
-=======
     const { query } = req;
     const parsedQuery = queryRodadaSchema.parse(query);
 
@@ -50,7 +43,6 @@ export const getAllRodadas = async (req: any, res: Response<SuccessDTO>) => {
             },
             rodadas,
         },
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
     });
 };
 

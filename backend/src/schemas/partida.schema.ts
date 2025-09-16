@@ -16,8 +16,6 @@ export const updatePartidaSchema = z.object({
 });
 
 export type UpdatePartidaDTO = z.infer<typeof updatePartidaSchema>;
-<<<<<<< HEAD
-=======
 
 export const queryPartidaSchema = z.object({
     page: z.string().transform(Number).default('1').pipe(z.number().min(1)),
@@ -28,4 +26,3 @@ export const queryPartidaSchema = z.object({
 });
 
 export type QueryPartidaDTO = z.infer<typeof queryPartidaSchema>;
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543

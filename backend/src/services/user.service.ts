@@ -1,9 +1,6 @@
 import { UserRepository } from '../repositories/user.repository';
-<<<<<<< HEAD
-import { UpdateUserDTO, updateUserSchema } from '../schemas/user.schema';
-=======
 import { UpdateUserDTO } from '../schemas/user.schema';
->>>>>>> 577d468ad5d06750b9058cf0eea1f004f81e1543
+
 import bcrypt from 'bcryptjs';
 import { ApiError } from '../utils/apiError';
 
